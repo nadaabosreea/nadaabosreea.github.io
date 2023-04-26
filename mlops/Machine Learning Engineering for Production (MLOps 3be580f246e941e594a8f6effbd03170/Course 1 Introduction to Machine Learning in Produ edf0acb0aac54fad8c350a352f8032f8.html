@@ -1,0 +1,714 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Course 1: Introduction to Machine Learning in Production</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="edf0acb0-aac5-4fad-8c35-0a352f8032f8" class="page sans"><header><img class="page-cover-image" src="https://www.notion.so/images/page-cover/met_silk_kashan_carpet.jpg" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">🧠</span></div><h1 class="page-title">Course 1: Introduction to Machine Learning in Production</h1></header><div class="page-body"><h1 id="e44a7f19-ee87-4c9b-a4c8-0925d3d99bb4" class=""><details open=""><summary>Week 1</summary></details></h1><div class="indented"><p id="cebfce17-fa6b-44a9-80db-047f15162e37" class="">Deployment</p><p id="8b52f6ce-f092-4124-a011-df369c6e73ca" class="">start with an example</p><figure id="255a0aad-8542-48f0-af7c-87f98f959ae2" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled.png"><img style="width:832px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled.png"/></a></figure><p id="cc12c4e4-95cc-46fb-89ee-bb25ada16270" class="">you have a production environment where a visual inspection device collects images of produced phones and draws a box around a defect in the phone, and after training the model it performs really well on the test set but fails in deployment because of <mark class="highlight-purple">data drift or concept drift</mark> that happens when  the images taken in deployment are darker than the ones taken when collecting the dataset, how do we detect this data drift and solve this problem?</p><p id="4582746e-b52d-4a0c-9993-01a9f23aa0b9" class=""><mark class="highlight-purple">What do we need beyond the ML code?</mark></p><figure id="1ac28046-80c6-466e-8d78-f91aaa1f88f2" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%201.png"><img style="width:865px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%201.png"/></a></figure><p id="5d07fa50-2612-40c7-b179-8b3b658329e9" class="">
+</p><p id="e7779a15-bf9c-44fa-be9c-d633612127a9" class=""><mark class="highlight-purple">Steps of an ML Project (Lifecycle)</mark></p><p id="880abd7a-934f-425d-b171-b3c19d80d587" class="">Monitor: look for data drift</p><figure id="11f727c4-8fe3-49f8-8fd7-9041d7c6d8af" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%202.png"><img style="width:876px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%202.png"/></a></figure><p id="8f011fd5-4f5a-422a-be88-845da8c5da30" class="">
+</p><p id="b728040d-57e0-41ed-88a8-cce1d4b176b0" class=""><mark class="highlight-purple">Case Study: Speech Recognition</mark></p><p id="addcf8ff-339a-4020-964e-47ab8a5eca42" class="">Scoping</p><figure id="e43b273d-fc2a-46b0-acef-741bc38ef03f" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%203.png"><img style="width:879px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%203.png"/></a></figure><p id="a32e0eb6-8355-4ae1-9fe4-a1f39dd80063" class="">Data</p><figure id="9ce7754c-5b72-4bb6-8a45-b468d5b77ddf" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%204.png"><img style="width:884px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%204.png"/></a></figure><p id="d00f98b6-23ac-4ad7-a1b9-32ca08ebf9f9" class="">standardize on a certain convention when confusion happens</p><figure id="3e21cd37-1a67-4df0-9a39-a2d6d966d04f" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%205.png"><img style="width:775px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%205.png"/></a></figure><p id="8313eace-db0d-46ec-993b-78212538c75a" class="">Modeling</p><p id="b980fcbb-4ecd-42d6-b570-2e16d5d1707b" class="">the 3 main things that go in this steps are:</p><figure id="f4dc1a44-85fe-4e7b-85e1-12c98280bf97" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%206.png"><img style="width:885px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%206.png"/></a></figure><p id="e567b400-3b73-4b09-9056-7b12996f82b4" class="">use error analysis to systematically improve your data</p><p id="ec6305ce-a143-406d-b288-9398e10e6442" class="">in a production team you focus on improving the data more than the code</p><p id="bcf321ff-5ffa-42fa-bd0f-11257d969999" class="">Deployment</p><figure id="ec577863-c999-41ae-b3a6-043559711f91" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%207.png"><img style="width:878px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%207.png"/></a></figure><p id="e70148b1-0c66-4417-9d86-6510d44f9c39" class="">Data drift: when the data distribution changes over time</p><p id="70390449-0e36-464d-ab85-b258f067c22b" class="">
+</p><p id="ff1e12b7-775d-4e78-baff-f792fcc8fc03" class=""><mark class="highlight-purple">The Course outline</mark></p><p id="a2596385-8509-4e5a-b77b-a324c8d5d383" class="">we will go in the opposite direction from deployment to data, </p><p id="4a396c3e-ad41-4ea0-8214-46315c985073" class="">MLOps</p><figure id="417dbcc4-5b53-43de-9ee7-21c6a0c1cc57" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%208.png"><img style="width:866px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%208.png"/></a></figure><p id="530ee050-6425-4ff0-be72-f7d083e6b0a7" class="">
+</p><p id="4040f2ca-6a00-4c0d-bf82-ca6c140c38e3" class=""><mark class="highlight-purple">Key challenges of Deployment</mark></p><p id="fee0af4f-0d3a-4942-a8d3-8d526128c524" class="">concept drift and data drift</p><p id="46e0a004-8798-43d6-bbc7-b060fcb69628" class="">data drift: the distribution of the data changes even if the mapping from x to y does not change</p><p id="65270b84-31f2-41d1-afed-3bcd8a2e21b5" class="">concept drift: the desired mapping between x and y changes, it is when the definition of what is y given x changes</p><p id="20552144-2759-485e-9481-7df68701c5ea" class="">concept drift ex. lets say x is the size of a house and y is the price and due to inflation the prices go up and y changes while x stays the same, so the mapping changes.</p><p id="e1897d7f-d144-4692-b003-d942688d8aa8" class="">for data drift it is like people started building bigger or smaller houses so that the distribution of the data changes over time</p><figure id="2cdd1f44-49c9-4d2c-a301-ec6e10f590db" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%209.png"><img style="width:837px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%209.png"/></a></figure><p id="1f7473d1-1df9-45a8-a555-5e87a4d5cc44" class="">other issues:</p><p id="e4588625-1a9a-471b-94ba-4f1da2bbc814" class="">throughput: how many queries per second do you need to handle</p><p id="239890d3-aeb0-4364-8344-f552f70fb87a" class="">logging: to monitor and provide data for the model in the future</p><figure id="17b155e3-def8-4073-9bb0-12c9a769f444" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2010.png"><img style="width:847px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2010.png"/></a></figure><p id="9633ec76-cd41-4c79-ac26-70f17c53f3e2" class="">
+</p><p id="b8df936e-228a-4cb2-a66c-00388e7fac6e" class=""><mark class="highlight-purple">Deployment Patterns</mark></p><figure id="f575cb2e-46f0-47a1-acd1-d136d6f2c4eb" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2011.png"><img style="width:572px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2011.png"/></a></figure><p id="3305b2d4-0ace-4131-a4c0-0ff50b9d4621" class="">ex.</p><p id="377e7110-c0a6-4105-b9a5-3cff9f153d3e" class=""><mark class="highlight-purple">Shadow mode: </mark>make the algorithm predict but not take decisions and compare it to the human judgement or an older model</p><figure id="6d6c3db5-90c0-4f99-9d6b-08591ba7e306" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2012.png"><img style="width:861px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2012.png"/></a></figure><p id="3c7ba265-c775-4a38-a73b-cd6dfe6685dc" class=""><mark class="highlight-purple">Canary mode:</mark> let the algorithm make decisions on a small amount of data, so you can spot problems early on </p><figure id="3085cd63-f9fd-46b9-9f05-c4fba7358e20" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2013.png"><img style="width:888px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2013.png"/></a></figure><p id="63baa513-54a0-4b0c-8886-3424e5b022b9" class=""><mark class="highlight-purple">Blue Green deployment: </mark>make the router suddenly switch over to the new green version, it is useful because you can rollback at any time</p><figure id="26bf12cd-3291-4077-9168-a1cccd05dcca" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2014.png"><img style="width:872px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2014.png"/></a></figure><p id="063b445b-fe0d-4d67-afe5-001a10f63fa7" class=""><mark class="highlight-purple">Degrees of automation</mark>: treating the deployment as not a deploy or no deploy decision, do it gradually<div class="indented"><p id="001edc17-9ac3-4843-9c3a-c5fbade752a4" class=""><mark class="highlight-purple">partial automation</mark>: if the algorithms is not more than 99% sure we leave it for the human</p></div></p><p id="b4909ccd-a2d8-4d60-b362-60bd0bd8d76b" class="">you do not have to get all the way to full automation</p><p id="6df8bec1-0184-45c9-971d-6a704402237c" class=""><mark class="highlight-purple">human in the loop deployments: </mark>making the AI assist only not full automation, sometimes it is the best design point</p><figure id="9fc70f8b-f879-4306-a4c7-0e23b28a8cd9" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2015.png"><img style="width:886px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2015.png"/></a></figure><p id="010af9ed-42d5-4abc-ad7c-32c16f4154dc" class="">
+</p><p id="9464446f-4853-4b63-89c1-782945d3f442" class=""><mark class="highlight-purple">Monitoring an ML system</mark></p><p id="87b65533-2cb4-438a-bcae-8cb162e93ce1" class="">use a dashboard to track the metrics over time</p><figure id="a05fd16d-84f5-4d61-a7a8-b859ecadfd1a" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2016.png"><img style="width:882px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2016.png"/></a></figure><p id="b4f9659a-7bef-4351-99c7-33197c0544fd" class="">monitor the statistical health: </p><p id="5af100ae-75b2-452a-97ee-be0bbd6b74ba" class="">average input length → how much your input changes</p><p id="ed250a5c-60c7-4de5-96a3-47d53b96b32c" class="">brainstorm different metrics to see if your input changes</p><p id="f5d8a9ee-3dd9-461e-9965-242cbd1beee2" class="">CTR: click through rate</p><figure id="d8b15dcc-8fea-44e8-be4d-75e0099b1577" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2017.png"><img style="width:873px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2017.png"/></a></figure><p id="d976bc46-202f-426f-9496-c22ecea6a08b" class="">input and output metrics is problem specific</p><p id="f0252327-9b8e-4c89-aae9-a9e46a3102ed" class="">ML modeling is iterative so as model deployment</p><p id="ec57927c-313a-4fdc-afb4-914d950b50d8" class="">deploying is the start of an iterative process, do performance analysis and keep updating your system</p><figure id="0218cf26-b980-42f1-b01e-cd9153fecf1f" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2018.png"><img style="width:866px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2018.png"/></a></figure><p id="cbd7db3e-173c-44f9-9f1c-3ca99bdde454" class="">it takes a few tries to discover the set of metrics to monitor</p><p id="a5ac9e19-5030-4b07-8b31-6e3786d3db94" class="">set thresholds for alarms</p><p id="2ecb4883-8b4d-469a-affa-230bfa3cbccb" class="">
+</p><p id="eda84d18-89fe-4de5-8c65-ce0d229c1d3a" class=""><mark class="highlight-purple">Pipeline monitoring</mark></p><p id="f91373ac-38a3-4c5b-b512-60ed75593041" class="">when the system is multiple models or steps, each module can affect the performance of the other module</p><p id="4067c110-ef56-48ea-b612-34a3ce5a68c0" class="">some examples:</p><figure id="b517d788-31e1-45e6-a1fa-fe2d23bc4654" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2019.png"><img style="width:831px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2019.png"/></a></figure><figure id="3e977f07-908a-4195-b5e0-34b675c7d9a2" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2020.png"><img style="width:869px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2020.png"/></a></figure><p id="ae9343a6-d59e-45c3-a8ce-dcf5659136ae" class="">metrics to monitor the pipeline</p><figure id="4a2a526e-8c65-41f0-91c4-6b0eadffc48d" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2021.png"><img style="width:861px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2021.png"/></a></figure><p id="05f9ee12-e98f-4db1-9536-81775c3b82e8" class="">
+</p></div><hr id="35ed27fe-7378-4fbf-b18a-a4a24ec390a3"/><h1 id="ef47753e-6b25-4636-8bd6-8ccfa6d9b238" class=""><details open=""><summary>Week 2</summary></details></h1><div class="indented"><p id="be5cd428-cf51-45df-94cb-9b3f89e68f65" class="">Selecting and training a model</p><p id="84ac1323-db7b-4b6f-bf9c-3dd311b3aa5c" class="">2 approaches to model: model-centric and data-centric → improving the model or making sure you are feeding the model high quality data</p><p id="9f340a6a-5f9e-4e18-b3e8-9347e5477ca1" class=""><mark class="highlight-purple">Key challenges</mark></p><p id="bfd5058e-edc5-41d1-ad2d-ed3b22af1fc1" class="">it is better to spend time improving the data</p><figure id="cd7a3e52-61d7-4216-a122-b17b9cb339b8" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2022.png"><img style="width:881px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2022.png"/></a></figure><p id="352d74b6-06a5-44ab-8d82-1d37c386b977" class="">you have to do well on the training set</p><figure id="8f5a5194-cc9d-46e7-b8e0-74d7c1a88ffd" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2023.png"><img style="width:840px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2023.png"/></a></figure><p id="6a45ef58-a590-4cf3-8848-188c34d4a589" class="">the business cares about the KPIs and Business metrics not the model metrics</p><p id="33e15fbb-28c5-460b-beab-e01b27fc34b4" class=""><mark class="highlight-purple">Why low average error isn’t good enough</mark></p><p id="345aaf6d-7275-4964-b3f3-c8732065f050" class="">performance depends on the type of query → we can forgive the model in the first example but not the second, to solve we can add some examples different weights</p><figure id="e4822da7-1eed-4e76-b5d9-0fb744d844c5" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2024.png"><img style="width:826px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2024.png"/></a></figure><p id="d94396da-ccf2-4294-b051-2a7465ec71e4" class="">performance on key slices of the dataset:</p><figure id="7f3b0607-bedd-4b64-83b1-d265399f87cc" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2025.png"><img style="width:848px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2025.png"/></a></figure><p id="c9c8ebdc-727a-4b4b-a1f5-d430742d7600" class="">not rely on accuracy when there is a class imbalance → select the best metric</p><figure id="10fedadd-ed9d-4af5-be53-6039f502631a" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2026.png"><img style="width:862px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2026.png"/></a></figure><p id="ef63227f-baa9-4cfb-b122-c8f94637dfa8" class="">
+</p><p id="1b91be4c-62bf-470e-bfc8-0f3ec71cd758" class=""><mark class="highlight-purple">Establish a baseline</mark></p><p id="deaf45af-7348-4668-96c7-55d2376d498f" class="">see what <mark class="highlight-purple">human level performance</mark> each class would get to compare it to out models’, so we can make a decision to which class should we focus on </p><figure id="3d87723b-7284-477d-8441-0c94d5bb3948" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2027.png"><img style="width:766px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2027.png"/></a></figure><p id="b3ab9023-15f2-46b1-b444-b7948e11e825" class="">HLP differs depending on the type of data </p><p id="5ee3a6f5-2d94-422e-bfc1-3bb05c6f723f" class="">unstructured data: humans are really good on it so measuring the HLP is good</p><p id="614678ff-8198-49a9-b4e2-964002cec69d" class="">structured data: humans are not as good as models, so HLP is a less useful baseline</p><figure id="734c1fd7-1f69-492e-99c2-ae8a9df8f300" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2028.png"><img style="width:858px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2028.png"/></a></figure><p id="54d734e8-916e-431d-b0fd-0bbcb18c9bec" class="">ways to establish a baseline:</p><p id="3c60786e-8ae9-4ed2-847c-f68aeb641fe5" class="">the baseline helps to indicate what might be possible, what is the best anyone could hope for , know that in a certain problem we can’t reach more than 70%</p><figure id="2b8d7d34-66a2-4bff-9c05-d60e55278e8b" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2029.png"><img style="width:819px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2029.png"/></a></figure><p id="18f46940-f6e2-4d1f-a919-671b84316451" class="">
+</p><p id="f4c93403-8899-4130-b414-658b797bac40" class=""><mark class="highlight-purple">Tips for getting started on an ML project</mark></p><figure id="ddca3b69-36b8-47b8-bff1-a06bd59f7e03" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2030.png"><img style="width:798px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2030.png"/></a></figure><p id="fd9e9fb8-ae0c-4137-94b6-319e0c934f4c" class="">sanity-checks for code and algorithms</p><figure id="baeef410-2b3a-4c89-a7c7-92a8ef1d97c5" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2031.png"><img style="width:858px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2031.png"/></a></figure><p id="78164cae-b0ea-4cca-93a8-68ee092ab28a" class="">make sure it works on a small set of the data before taking a huge time running it on all the data</p><p id="ad93d08e-a7ff-44ae-b411-e06830dbb31e" class="">
+</p><p id="28493584-ff89-4eda-91f7-d7a6fd32a196" class=""><mark class="highlight-purple">Error analysis</mark></p><p id="37519185-b3a6-4d3a-983d-f972b23005be" class="">the first time you train a model, you can never get it to work after error analysis you start to make it better</p><p id="71e0f8a9-effa-43aa-8cf4-521fb4b48035" class="">see the examples of prediction vs labels and detect what is wrong with the model, some ideas to what the model is short for, maybe the model needs data to have a more bandwidth connection or has car noise and so on …</p><figure id="b05af820-d909-47a5-98a2-4bcd726c6a1c" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2032.png"><img style="width:858px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2032.png"/></a></figure><p id="eb419bde-f516-4ea7-aa33-d0796beb54a5" class="">there are MLOps tools to monitor error analysis</p><p id="e816cc2e-aaf3-4f2a-91ab-656c56651dda" class="">error analysis is also an iterative process</p><figure id="c5ea65bd-513b-49dd-b54e-dc1d42821916" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2033.png"><img style="width:849px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2033.png"/></a></figure><p id="f05df07d-0695-4617-a2de-3d5613d88967" class="">useful metrics to monitor</p><p id="6f0ae249-662c-4d6a-ac66-1c3ac6945967" class="">how much each tag (categories we decide) is and how much we are not getting right</p><figure id="eddedfba-c5b4-4918-827f-7d4e8ef58dcf" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2034.png"><img style="width:829px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2034.png"/></a></figure><p id="dd06c9e1-83eb-4188-ba8c-1e10a6c75fc8" class="">
+</p><p id="774ac5c2-2a22-4fc4-9066-4b86e4c923ec" class=""><mark class="highlight-purple">Prioritizing what to work on</mark></p><p id="4823ffcf-f414-44c1-a4d4-dc280bd87be2" class="">if some tag accounts for a large section in our data we can work on it even it doesn’t contribute with the largest error, so we can get a better average accuracy if that is better</p><figure id="abd59fa0-14ed-4984-9943-ceefa21a48b5" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2035.png"><img style="width:892px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2035.png"/></a></figure><figure id="f0751f09-cf6e-432e-aeae-03094cc12c29" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2036.png"><img style="width:782px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2036.png"/></a></figure><p id="9167d4cb-d4a6-4d3e-aea6-98588e6179eb" class="">adding or improving the data for the tags that we need to improve</p><figure id="5ac57b09-729e-4461-843b-ddc3a6a4b967" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2037.png"><img style="width:855px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2037.png"/></a></figure><p id="a4c3675f-fde6-47f2-8fa4-c4a749f825bb" class="">
+</p><p id="1bd38ae1-6fb3-48b6-b368-8e694e097446" class=""><mark class="highlight-purple">Skewed Datasets</mark></p><p id="9ebaea3d-255f-4f74-95fa-fcc0a04e7b72" class="">highly imbalanced datasets</p><figure id="ff186fa2-d567-4c71-a558-57fb4d464cd9" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2038.png"><img style="width:851px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2038.png"/></a></figure><p id="17ff0e1d-6486-49c0-8651-2086b832bc99" class="">raw accuracy is not useful</p><p id="324311cf-c71c-425e-aab4-ce0a5dbb4fba" class="">build a confusion matrix instead and measure the precision and recall</p><p id="75ed4925-17a4-4116-b096-2c0708723672" class=""><mark class="highlight-purple">precision</mark>: what fraction did the algorithm get right out of all the predicted examples for a certain class → % from the predicted</p><p id="48d84465-3a83-4516-93b3-57e40f6636e2" class=""><mark class="highlight-purple">recall</mark>: what fraction did the algorithm get right from this class (out of the fraction of that class) → % from the ground truth</p><figure id="331cd992-e6a0-462f-b2cf-f6aa2607f747" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2039.png"><img style="width:876px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2039.png"/></a></figure><figure id="bebee98b-0a85-44c5-8195-645a23d57650" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2040.png"><img style="width:883px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2040.png"/></a></figure><p id="51d45595-8b9d-47fb-9306-fe91d62d2343" class=""><mark class="highlight-purple">F1-score</mark>: harmonic mean between precision and recall → taking an average but placing more emphasis on the lower number (it is normally very close to the lower number)</p><figure id="afb1ef4e-b2dd-4a17-8374-54ea3e70b25b" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2041.png"><img style="width:866px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2041.png"/></a></figure><p id="bf5a2eb4-fd7e-4e6d-bb59-083504573c6f" class="">these metrics are also useful for multi-class classification</p><figure id="1d66a399-68c6-40df-a67c-4a619c61b66a" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2042.png"><img style="width:625px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2042.png"/></a></figure><p id="c7741b10-110b-4547-bcf1-67d27e2e8473" class="">
+</p><p id="a564ac3f-053c-47c7-9325-61d84d8e7a0f" class=""><mark class="highlight-purple">Performance Auditing</mark></p><p id="38bde2d5-77ac-4f51-a826-e91fb09913d6" class="">doing a final check before deployment</p><p id="26d203a5-c8e4-4388-bc5d-455ea4b3ee6e" class="">see all the ways that the system can go wrong on, check for bias and rare class problems, cluster data using defined categories that are estimated according to the problem and test accuracy on</p><figure id="4ccd8315-dd1e-44eb-bfa3-ecdcde434962" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2043.png"><img style="width:840px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2043.png"/></a></figure><figure id="a935d18a-0c83-4f13-9cba-614f9785a67c" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2044.png"><img style="width:833px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2044.png"/></a></figure><p id="4ef0e3fb-1510-4ead-bb29-ceb2b545b6d3" class="">
+</p><p id="3170297c-e487-4b56-b380-2d51edfb0325" class=""><mark class="highlight-purple">Data-centric approach of development</mark></p><p id="3bb8f5e8-2827-47c5-95f4-bf53a49d4f92" class="">the difference between the model and data centric approaches</p><figure id="d3716e74-f5f1-4c40-9520-d592cb5857e2" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2045.png"><img style="width:799px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2045.png"/></a></figure><p id="efe66eb3-d849-45d9-8799-d6aaccd65f61" class="">
+</p><p id="2b96b5f2-ff93-4a90-8d7b-4027d31ebe2c" class=""><mark class="highlight-purple">Data augmentation</mark></p><p id="8f332d33-162e-4b67-beb3-8b1dfca66b71" class="">think of the performance as a sheet or a curve, you try to pull this sheet up to increase performance to match HLP performance by getting more data</p><p id="597d2473-d673-46e8-9a9e-bf75543c9b6e" class="">pulling up one point causes the other near by points to go up</p><p id="d1d3e17b-e85f-4e10-a010-347b98175e0c" class="">error analysis will tell you where you need the sheet to go up</p><figure id="3caf38a0-65fc-433a-848a-c0ac1e349a9d" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2046.png"><img style="width:875px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2046.png"/></a></figure><p id="fedde483-52a6-4eee-92c3-d109b64c9e34" class="">how to do data augmentation?</p><p id="601e820a-03fd-4e2b-ba39-77f50054e87d" class="">for speech recognition → you can take a signal and add noise or music to it, decide what type of noise to use and how loud should it be → it should be always something that a human can perform well on or else you will be feeding your model noise</p><figure id="95d3ad12-b588-482e-863f-57fd63b6956a" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2047.png"><img style="width:831px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2047.png"/></a></figure><p id="df98581b-697a-41d1-9e68-43bdd7fafc06" class="">for images → flip horizontally, contrast changes for ex., use GANs but it is an overkill</p><figure id="25c96acf-9cd6-46fe-8475-983e65363eec" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2048.png"><img style="width:874px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2048.png"/></a></figure><p id="d5ba511b-19db-4348-8dfe-78cdda1a15d5" class="">Model iteration → train a model → error analysis → improve</p><p id="306ca474-a22a-4dbc-98f9-e5c3bdd82d9e" class="">data iteration loop → same but for data</p><figure id="1a1931c9-ad2b-4d2c-b4bf-69820c05bcf7" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2049.png"><img style="width:770px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2049.png"/></a></figure><p id="9736b225-aa6a-48da-b209-e428c87e1a02" class="">
+</p><p id="8716e0e7-b5e1-4eca-a186-fc2848355f14" class=""><mark class="highlight-purple">Can adding more data hurt?</mark></p><p id="afc97c72-dbe9-4582-bf6f-d7eb9172216e" class="">for unstructured data, normally no</p><p id="50a2e10e-b8d6-4914-81c2-7e387422aed3" class="">when the train set becomes so different from the dev and test sets because of data augmentation, does that hurt the model?</p><figure id="59426503-66f7-41b7-bada-320eead296bd" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2050.png"><img style="width:874px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2050.png"/></a></figure><p id="ad27ff9c-5cbb-4f35-8037-3989c9bddcb7" class="">ex. a rare to happen example</p><figure id="0d2c2f84-5a18-4207-a0af-2c12d4768d88" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2051.png"><img style="width:873px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2051.png"/></a></figure><p id="036f34f0-0b32-4734-8e37-a9796591c255" class="">
+</p><p id="2907e0d5-4acd-447e-bdc3-9bfb5e16e0c2" class=""><mark class="highlight-purple">Adding Features</mark></p><p id="cb562a85-afc2-4767-900e-12726af893fd" class="">for structured data</p><p id="dd812a79-d960-49c0-a651-f6054781d3d3" class="">for product recommendation shifting from a collaborative filtering approach to a content based filtering one is common now, looking at the description of the restaurant can be more useful than looking at similar customers</p><p id="77209e51-c1e8-4d3f-8e84-4f7def188fe6" class="">deep learning is useful for unstructured data problems, but for structured data designing more features can be more useful</p><p id="5920dcd5-023d-4b25-b050-6a7947bf1133" class="">error analysis can be used to give inspiration to what features to add</p><p id="b9a76917-3b05-46a6-b6c5-4b70a0b83378" class="">ex. of adding more features:</p><figure id="d081aafa-697e-4dce-899f-70abcbf4e699" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2052.png"><img style="width:904px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2052.png"/></a></figure><p id="53287a00-90db-4dc5-b94b-67328c6caf03" class="">
+</p><p id="99b23f78-02e3-4345-8068-b29adc753c64" class=""><mark class="highlight-purple">Experiment Tracking</mark></p><figure id="7eb5ac32-a0e7-4ff9-bcdc-1de8e17e1ea3" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2053.png"><img style="width:866px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2053.png"/></a></figure><p id="b8d80294-e1b4-4db8-9adc-c655f9ab4a58" class="">
+</p><p id="89423713-749b-45b9-9190-c1f266d8c6a3" class=""><mark class="highlight-purple">From Big data to good data</mark></p><figure id="053aa343-9388-4244-bf30-b7617173c703" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2054.png"><img style="width:882px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2054.png"/></a></figure><p id="85947536-f83a-4b65-b16b-56c49732f7f5" class="">
+</p></div><hr id="8e315931-e81a-48a9-95df-ebf3df66d15a"/><h1 id="072b5ee7-0d26-4311-9c80-692310f9daa8" class=""><details open=""><summary>Week 3</summary></details></h1><div class="indented"><p id="880fee9e-93ae-4cde-a397-7b5fb12a4c65" class=""><mark class="highlight-teal"><strong>Why is data definition hard?</strong></mark></p><figure id="7a07ed8a-bf64-4abe-a38e-1eff73902b7d" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2055.png"><img style="width:876px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2055.png"/></a></figure><p id="cc2b5721-b535-4021-a978-f9e94fa558c6" class="">labelers have different ways and equally right ways to label the data, but using different ways to label different parts of the data cases inconsistencies in the labels which confuses the model later</p><p id="204a417e-d8a7-495b-908c-999707a2919c" class="">
+</p><figure id="9ca3ce6f-e962-409e-9a6a-8c42970e2077" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2056.png"><img style="width:878px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2056.png"/></a></figure><p id="86be95bf-25dc-4af6-9742-db0cef2f1e16" class="">this week we are gonna work with best practices to improve the quality of data</p><p id="8aa0b81b-9cf0-4cd0-9b14-59a43d3ffb9d" class="">
+</p><p id="f601125a-3006-45ed-b172-262de1cf73d5" class=""><mark class="highlight-teal"><strong>More label ambiguity examples</strong></mark></p><figure id="eaf080ea-b941-404b-9059-ecbfb51f7f59" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2057.png"><img style="width:625px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2057.png"/></a></figure><p id="b2673b6b-6d4b-4123-ab2d-b5eb006cf124" class="">we have to <mark class="highlight-teal">standardize </mark>on one <mark class="highlight-teal">convention</mark></p><p id="10e359c9-27b9-4621-9c9e-a54ba7333951" class="">
+</p><p id="6ef00344-f0ff-4234-a4b0-4e961a6a3596" class="">improving the quality of the input x can be useful if a human can’t label the data</p><figure id="22ed832f-6137-440b-b528-62e38cd20ea1" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2058.png"><img style="width:841px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2058.png"/></a></figure><p id="c48ddb1f-b88c-4416-8660-c20231dea616" class="">
+</p><p id="88d3e399-9d93-4292-8f93-771e590beaa2" class=""><mark class="highlight-teal"><strong>Major types of data problems</strong></mark></p><p id="807ba969-bb72-40a9-a0fa-0e1279ce22d7" class="">for  a small dataset clean labels are critical because one example can be 1% of your data</p><figure id="2ddbb20f-9eb6-4455-af54-9ce4e81cc4fc" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2059.png"><img style="width:870px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2059.png"/></a></figure><p id="2602878d-bc5a-4ad9-8974-76d326f8450a" class="">a data process can be to ask a large group of labelers to label the data, so defining labeling rules is critical so inconsistencies don’t happen, there’s no time a resources to relabel data </p><p id="f1d720b9-45fa-4da5-b096-c76e18853145" class="">recap:</p><figure id="14898b06-46e9-4b72-8fb7-4cb2c95a43c5" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2060.png"><img style="width:840px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2060.png"/></a></figure><figure id="4f115ee7-3ddd-4054-ad37-fd9877cf933e" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2061.png"><img style="width:829px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2061.png"/></a></figure><p id="126c017b-86b6-455e-af45-51caba3e53be" class="">taking advice from an expert in one of the above sections is very useful better than dealing in a general way with the problem, like it is any other ML problem</p><p id="c150be6c-8c94-4957-aa86-7b977f19ae47" class="">
+</p><p id="30571266-d861-4d8a-b914-5c87d6863eb3" class=""><mark class="highlight-teal"><strong>Small data and label consistency</strong></mark></p><figure id="c3356e16-f2c0-4912-b063-04691e3d8a7a" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2062.png"><img style="width:890px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2062.png"/></a></figure><p id="d20f6e3a-9896-4520-abab-87fcbff4d7aa" class="">the idea in small datasets is to make sure that the labels are clean , we can get highly predictive models this way even with small data</p><p id="26f433ba-4066-457d-accc-52eb74034f9d" class="">
+</p><figure id="62da91ef-ce5e-4bd3-8dd7-d19e1485f7fe" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2063.png"><img style="width:872px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2063.png"/></a></figure><p id="5217cb76-688d-4e60-8c33-5f58e412be75" class="">define a threshold that decides what is considered a scratch gives us better clean data</p><figure id="c934dc09-2202-49e3-9407-68cd5edddeb5" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2064.png"><img style="width:863px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2064.png"/></a></figure><p id="c4c41300-f2ab-4b76-ab7a-c361c1feb04f" class="">
+</p><p id="db3befc1-069d-404c-9554-2087f9b7a741" class=""><mark class="highlight-teal"><strong>Improving label consistency</strong></mark></p><figure id="feea713c-7a44-464b-8d92-7b5cfbce81f7" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2065.png"><img style="width:819px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2065.png"/></a></figure><figure id="e5fdde55-a559-4da3-82c3-536ecbb0dcd9" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2066.png"><img style="width:840px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2066.png"/></a></figure><p id="1f3d9d3e-fb1e-4100-9ffe-e3397f09a39b" class="">
+</p><p id="15bb6d29-a4f3-4e28-923b-25a52f0d8797" class="">use a third class to label ambiguous examples</p><figure id="28c6bcc9-3806-46ce-ba91-e56c667093fe" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2067.png"><img style="width:820px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2067.png"/></a></figure><p id="89535be4-5747-445f-8c2a-25bc8cb3d842" class="">[unintelligible] for unclear sounds</p><figure id="fe035a6d-15c5-4c2b-aa67-c5dd70d71c05" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2068.png"><img style="width:846px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2068.png"/></a></figure><p id="54e5f8ac-0f96-4a1d-b83f-4089df7abf54" class="">
+</p><p id="f1906a80-ec41-4fd6-b268-7ed607206556" class=""><mark class="highlight-teal"><strong>Human level performance (HLP)</strong></mark></p><p id="ff91ecad-f863-4743-bd6d-4175b3ca4f70" class="">HLP can be used as a reference to tell us how good can we reach in this task</p><p id="7d81970c-29e4-4f2a-a60a-98781329c3c0" class="">get an inspector to tell us the labels and compare it with what the business needs</p><figure id="6304ea80-ec47-401b-a8f0-2c3fe7d3988f" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2069.png"><img style="width:864px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2069.png"/></a></figure><p id="6c65a915-f4e7-4355-95cd-df7fa5dab6be" class="">but what is exactly is this ground truth label, are we just comparing two labelers’ opinions? we will discuss this later</p><figure id="3b257aca-8775-4f86-acf7-352d2d65726b" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2070.png"><img style="width:825px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2070.png"/></a></figure><p id="b8278026-071c-4b9f-927f-5c1dffbfa1c1" class="">
+</p><p id="2f0061fd-e23a-43c5-bc7a-26ccd99b9f86" class="">don’t use the probability that 2 labelers agree and call it HLP</p><p id="6fc5dfe7-9fca-4c5b-846f-ccc295c6be02" class="">it looks like the model is doing better but it is fake</p><figure id="b4e3b5a7-3d72-402d-ac0b-5d2a6cf0d963" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2071.png"><img style="width:866px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2071.png"/></a></figure><p id="d1652d52-4f2b-470e-83ca-20a89ad90fd5" class="">
+</p><p id="16454329-1fcc-4725-bd04-027f255ded18" class=""><mark class="highlight-teal"><strong>Raising HLP</strong></mark></p><figure id="d500f45a-ece3-471c-a7b2-4ac8da8b41ec" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2072.png"><img style="width:860px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2072.png"/></a></figure><p id="d895e9c2-12d2-4ba5-8ff8-6db061103bf8" class="">change the labels of the GT and inspector according to a threshold to raise HLP, more consistent labels will help the model</p><figure id="7648ccf6-1d6c-43b2-9826-8c9e07e16668" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2073.png"><img style="width:811px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2073.png"/></a></figure><p id="bdd571fe-743f-46ec-a4fd-ace19ff760c5" class="">
+</p><figure id="a1f1acd2-fb59-4e94-baa8-a9c206d5bf9c" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2074.png"><img style="width:868px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2074.png"/></a></figure><p id="286a9d1a-a3f7-4c2f-ba0d-6d2913493c7e" class="">
+</p><p id="614ea61e-b689-43a4-8ed8-653fb8187507" class=""><mark class="highlight-teal"><strong>Obtaining data</strong></mark></p><p id="70575d9f-efc4-4a3b-a411-8d26bf54b927" class="">don’t wait to collect all the data, get in the loop as soon as possible</p><p id="89dfb615-2492-406e-a8c5-55e817bc4bd9" class="">collect a small amount of data, train and do error analysis to identify if you need to spend more time collecting more data</p><figure id="4aac76c1-5f0e-4eb9-920a-fc2b182b21db" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2075.png"><img style="width:859px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2075.png"/></a></figure><figure id="bb6e2d44-8aaf-4660-9083-a7536adb79d6" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2076.png"><img style="width:697px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2076.png"/></a></figure><p id="8cf636de-3f86-4cde-bb54-bfed0119040f" class="">decide what sources of data should you use, decide according to data quality time and cost</p><p id="07830f6f-5618-4dd6-8885-99dbca9e042e" class="">
+</p><p id="3e963ba7-11f9-4987-82b7-c32344317882" class="">3 ways to get you data labeled:</p><p id="59271f53-8225-4d44-9df4-7e1082e5d0db" class="">In-house: your own team</p><p id="22e14063-8522-4bd8-af31-a8c64f230ac6" class="">outsourced: another company that labels the data, sometimes specialized companies</p><p id="7d52d33b-c32e-4194-83de-86362839ceb2" class="">crowdsourced: use a crowd sourcing platform like Turk</p><p id="ce4d2ca0-bad7-4446-afc5-d9392299fb0d" class="">spend a few hours labeling data to get a grasp around the problem</p><figure id="06a56b2c-25dc-4270-ba0f-d1468a4d0b78" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2077.png"><img style="width:893px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2077.png"/></a></figure><p id="4bcdb711-dba0-449b-bf80-0c35f673c7d6" class="">
+</p><p id="a12918e2-4bd3-48a0-8be1-deedc3c7f71f" class=""><mark class="highlight-teal"><strong>Data pipeline</strong></mark></p><p id="bcca625f-f2ed-4ca2-b2ac-da6dd4df8b9c" class="">or data cascades</p><p id="a4b9e98a-577d-439f-9633-2cbf15096528" class="">how to replicate the scripts in production?</p><figure id="ac4a1fc1-4970-41d9-aa54-09dd8bee03c8" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2078.png"><img style="width:847px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2078.png"/></a></figure><figure id="0c7c9aaf-a268-4e62-9ead-a337ad88f61d" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2079.png"><img style="width:868px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2079.png"/></a></figure><p id="871e20b5-5768-4d5f-9448-1932fad33777" class="">
+</p><p id="a67b01a0-528d-4969-a876-9bea15409254" class=""><mark class="highlight-teal"><strong>Meta-data, data provenance and lineage</strong></mark></p><p id="6b5fe3bd-f06e-47c6-ae0b-159752c86080" class="">some data pipelines are complex, how to deal with them?</p><p id="53732303-195b-43c9-aca3-eea13fda0d84" class=""><strong>data provenance: where the data came from, who did you purchase it from for ex.</strong></p><p id="9f60c734-98a5-4c88-8876-653c1d65b2e4" class=""><strong>lineage: sequence of steps needed to get to the end of the pipeline</strong></p><p id="ccb46131-693a-4d08-ba61-6d652159b9a4" class="">having an extensive documentation will keep track of them</p><p id="3cdadc77-ceed-416e-b769-903c75638a8f" class="">to be able to replicate the pipeline if there’s an error in the beginning or we wanted to change something</p><p id="1bf59b4b-eb94-44b7-9a34-ecdaa6141d63" class="">tensorflow transform can help</p><p id="fa786913-9e91-4590-8171-9e659984460a" class="">we are not great at solving this problem yet</p><figure id="b4734b16-fccb-4996-b9b6-24b91de8cb29" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2080.png"><img style="width:888px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2080.png"/></a></figure><p id="c5d94a31-d351-4d01-8aca-5dc4bbea2643" class="">
+</p><p id="c3fad0a1-4dbd-4b1f-8aac-8c84278ea3ce" class=""><strong>make use of meta-data: data about data</strong></p><p id="6cad26d9-8141-40fc-a19a-b805bf3ce23b" class="">meta-data ex.: time, factory, no. of the phone, data is the images</p><p id="9f2315f7-d05e-4dcf-a254-e8ab9f5032dc" class="">what if line 17 causes errors regularly, this can be found if we stored the meta-data</p><p id="500959e8-543f-4c62-a686-243d1e537940" class="">it can help generate key insights</p><figure id="f710dfb0-ab68-4e72-8db8-3af9c4b02e37" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2081.png"><img style="width:866px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2081.png"/></a></figure><p id="55a2d082-0be4-4c6b-95c0-3b8569840c91" class="">
+</p><p id="90186ead-7a54-4361-808c-e523fdd7e6f8" class=""><mark class="highlight-teal"><strong>Balanced train/dev/test splits</strong></mark></p><p id="97a910d3-41d0-4d5f-b8ee-7c7fb9d6adf4" class="">make the dev set representative </p><figure id="f7d9783b-edce-4615-890b-e9f94e48248f" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2082.png"><img style="width:856px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2082.png"/></a></figure><p id="b859932f-74a3-435e-841a-c74932bd2cf8" class="">if you have a large dataset, a random split is fine</p><p id="7d8a2025-6cc7-4a56-8d26-452d72a3ce43" class="">balanced split is for small datasets</p><p id="80ccdf47-0e9a-45b4-b58e-98262e1191f4" class="">
+</p><p id="8ee58a9d-0402-4e2c-a040-4514e5a30c0e" class=""><mark class="highlight-teal"><strong>What is scoping?</strong></mark></p><p id="5cb8a6f9-d00a-45a5-b9bb-3cb3014b2ca1" class="">picking what project to work on and planning a scope for the project</p><p id="b0186c48-55ab-4fda-9620-49a4613d5cd4" class="">if you are going to do so much effort on a project, try to think of the right choice of project to make</p><figure id="27611922-f7d5-4ba1-a200-4cc5fb7ff202" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2083.png"><img style="width:875px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2083.png"/></a></figure><p id="0f964b6c-eb9b-4536-ad30-f207b4fc5843" class="">what project to choose?</p><p id="9fb7792f-a4e2-4c81-b9db-60b259089dd4" class="">pick the most valuable project</p><p id="73b6dc93-f7ee-4a6e-a662-0a0478d9e32b" class="">
+</p><p id="c0e0c08c-15fb-407a-b0c8-ec1071b78145" class=""><mark class="highlight-teal"><strong>Scoping process</strong></mark></p><p id="d71b81f9-e046-4e71-bf9b-17641e9450d4" class="">hear about their business problems and decide if AI could help from the business</p><p id="b30d35e7-837f-446f-bf8b-231fedc908c3" class="">having a clear understanding of the problem gives us ability to come up with a good solution</p><p id="c228fa5a-ff17-4878-92eb-7a1e4eb4aaa5" class="">diligence: double checking if an AI solution will be valuable</p><figure id="7be194bc-9000-4448-aa0a-27a3bc70a93d" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2084.png"><img style="width:839px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2084.png"/></a></figure><figure id="28673be9-cb26-404d-bc69-d698026dfa3f" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2085.png"><img style="width:854px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2085.png"/></a></figure><p id="090a789e-7e3b-4a1c-8e11-88c00bafecea" class="">don’t just jump to the first project, do conversion thinking, what if there’s another project that can be 10x valuable</p><p id="2cd165d1-2650-4ba0-a0e5-163adb2e798f" class="">
+</p><p id="0a3f4afc-1000-4a75-99ff-04293936bf01" class=""><mark class="highlight-teal"><strong>Diligence on feasibility and value</strong></mark></p><figure id="4874b44a-e697-4484-b379-a7b26422952e" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2086.png"><img style="width:828px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2086.png"/></a></figure><figure id="722d45b8-863a-48cd-9850-7e3796dd1653" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2087.png"><img style="width:857px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2087.png"/></a></figure><p id="8b797dbd-2723-482e-9591-b38eadd732d1" class="">sometimes the data is not predictive, and that decides if the idea is feasible or not, so we can’t just take the data and train a model to end up with a model that randomly guesses</p><figure id="f07b1110-60da-416a-aa3f-88251d8d2477" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2088.png"><img style="width:812px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2088.png"/></a></figure><p id="0340b918-f16c-4db6-8781-4c45d0f1be45" class=""><mark class="highlight-blue"><strong>predicting stock prices from history of prices is not technically feasible</strong></mark></p><p id="007ca757-a947-46cc-8544-02ac1c80809c" class="">
+</p><p id="3baa9c11-4b4d-4adc-a88d-ef3866d6e984" class="">using the history of the project to see if the error rate can go down from the current state, see how well the team could do in the future</p><figure id="b9c84935-0373-4076-a31f-8ddca9b2042b" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2089.png"><img style="width:842px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2089.png"/></a></figure><p id="6835efdf-598d-4eab-9151-70fe08b7d9de" class="">
+</p><p id="9e8fe8cd-881f-4ca6-912c-6956e9784c86" class=""><mark class="highlight-teal"><strong>Diligence on value</strong></mark></p><p id="569b6888-eedf-4703-aae2-154399858701" class="">how to estimate the value of an ML project</p><p id="c3fa0170-122b-4ffd-ab3d-12f7bfcadb26" class="">the ML team and business should agree on a metric, they both have their own metrics</p><figure id="44f849e6-15b5-4d32-9231-70a743370d2c" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2090.png"><img style="width:874px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2090.png"/></a></figure><figure id="a0ab3cbd-c795-490e-8e8c-242a5541567e" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2091.png"><img style="width:780px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2091.png"/></a></figure><p id="c180c9f3-0758-4d20-b736-486ffd99779e" class="">
+</p><p id="e243b01e-d3a3-47b4-ab57-df1b652ea2f9" class=""><mark class="highlight-teal"><strong>Milestones and resourcing</strong></mark></p><figure id="32cbbfbe-2385-4bc1-ab6d-ab76934e65ef" class="image"><a href="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2092.png"><img style="width:844px" src="Course%201%20Introduction%20to%20Machine%20Learning%20in%20Produ%20edf0acb0aac54fad8c350a352f8032f8/Untitled%2092.png"/></a></figure></div><hr id="64caa717-00d2-45f8-bf60-f2eac65a2ae0"/><h1 id="bb141949-26e7-4bce-b355-aec839cc9b5b" class=""><details open=""><summary>References of the Course</summary></details></h1><div class="indented"><h2 id="8615eb45-0ec0-41f4-b173-cb89915de3a3" class=""><strong>Introduction to Machine Learning in Production</strong></h2><p id="d6186870-ec5a-48b5-aecd-336557d0919c" class="">This is a compilation of resources including URLs and papers appearing in lecture videos.</p><p id="479fee24-87e6-4b05-98d8-a717a749d235" class="">Overall resources:</p><p id="770a56cb-01c8-466e-b79d-f6ed758642ed" class="">Konstantinos, Katsiapis, Karmarkar, A., Altay, A., Zaks, A., Polyzotis, N., … Li, Z. (2020). Towards ML Engineering: A brief history of TensorFlow Extended (TFX). <a href="http://arxiv.org/abs/2010.02013"><span style="border-bottom:0.05em solid">http://arxiv.org/abs/2010.02013</span></a></p><p id="aed15562-bb74-4817-ab89-6802fb718e89" class="">Paleyes, A., Urma, R.-G., &amp; Lawrence, N. D. (2020). Challenges in deploying machine learning: A survey of case studies. <a href="http://arxiv.org/abs/2011.09926"><span style="border-bottom:0.05em solid">http://arxiv.org/abs/2011.09926</span></a></p><h2 id="48cb0721-a0fd-41aa-af9e-5fb51405fa30" class=""><strong>Week 1: Overview of the ML Lifecycle and Deployment</strong></h2><p id="55b6bef2-b05d-4ed1-bda7-9d20482883e0" class=""><a href="https://towardsdatascience.com/machine-learning-in-production-why-you-should-care-about-data-and-concept-drift-d96d0bc907fb">Concept and Data Drift</a></p><p id="fc672727-ab80-4e01-b4ad-2bdd0be2e862" class=""><a href="https://christophergs.com/machine%20learning/2020/03/14/how-to-monitor-machine-learning-models/">Monitoring ML Models</a></p><p id="c9d8a554-73ef-44dc-8640-e7cb692d11a9" class=""><a href="https://youtu.be/06-AZXmwHjo">A Chat with Andrew on MLOps: From Model-centric to Data-centric AI</a></p><p id="bff12cec-521d-46f4-86ce-93c24ea707f6" class="">Konstantinos, Katsiapis, Karmarkar, A., Altay, A., Zaks, A., Polyzotis, N., … Li, Z. (2020). Towards ML Engineering: A brief history of TensorFlow Extended (TFX). <a href="http://arxiv.org/abs/2010.02013"><span style="border-bottom:0.05em solid">http://arxiv.org/abs/2010.02013</span></a></p><p id="9f762633-3261-4c82-8b6a-64e7c697dcfa" class="">Paleyes, A., Urma, R.-G., &amp; Lawrence, N. D. (2020). Challenges in deploying machine learning: A survey of case studies. <a href="http://arxiv.org/abs/2011.09926"><span style="border-bottom:0.05em solid">http://arxiv.org/abs/2011.09926</span></a></p><p id="e1e0de01-1c34-4017-988f-37a4fff7b4ec" class="">Sculley, D., Holt, G., Golovin, D., Davydov, E., &amp; Phillips, T. (n.d.). Hidden technical debt in machine learning systems. Retrieved April 28, 2021, from Nips.cc</p><p id="8e85d301-5ab7-4ebb-ae1c-b77be1f3550a" class=""><a href="https://papers.nips.cc/paper/2015/file/86df7dcfd896fcaf2674f757a2463eba-Paper.pdf"><span style="border-bottom:0.05em solid">https://papers.nips.cc/paper/2015/file/86df7dcfd896fcaf2674f757a2463eba-Paper.pdf</span></a></p><h2 id="113b2599-b84b-4857-b6a6-9ac7ee9de458" class=""><strong>Week 2: Select and Train Model</strong></h2><p id="4789135d-9275-475f-ac5a-28c7391ac160" class=""><a href="https://blog.ml.cmu.edu/2020/08/31/3-baselines/">Establishing a baseline</a></p><p id="7200952e-7c8d-491a-bdff-8532ce0e2dc7" class=""><a href="https://techcommunity.microsoft.com/t5/azure-ai/responsible-machine-learning-with-error-analysis/ba-p/2141774">Error analysis</a></p><p id="e5cbf7a0-1d5c-4cbc-9403-f59c9a5d352b" class=""><a href="https://neptune.ai/blog/ml-experiment-tracking">Experiment tracking</a></p><p id="6c84056d-da37-44ea-9a31-5ed55e2e5afc" class="">Brundage, M., Avin, S., Wang, J., Belfield, H., Krueger, G., Hadfield, G., … Anderljung, M. (n.d.). Toward trustworthy AI development: Mechanisms for supporting verifiable claims∗. Retrieved May 7, 2021<a href="http://arxiv.org/abs/2004.07213v2"> </a><a href="http://arxiv.org/abs/2004.07213v2"><span style="border-bottom:0.05em solid">http://arxiv.org/abs/2004.07213v2</span></a></p><p id="15ab2178-d899-4708-95f7-d31f42a97d78" class="">Nakkiran, P., Kaplun, G., Bansal, Y., Yang, T., Barak, B., &amp; Sutskever, I. (2019). Deep double descent: Where bigger models and more data hurt. Retrieved from <a href="http://arxiv.org/abs/1912.02292"><span style="border-bottom:0.05em solid">http://arxiv.org/abs/1912.02292</span></a></p><h2 id="4c049609-61d5-4c30-bf7f-b7ba01ca3528" class=""><strong>Week 3: Data Definition and Baseline</strong></h2><p id="9585b48a-9e06-48ae-b6ad-f8fb66cff284" class=""><a href="https://csgaobb.github.io/Projects/DLDL.html">Label ambiguity</a></p><p id="86b08631-033e-4e15-9351-edd867790323" class=""><a href="https://arxiv.org/pdf/1706.06969.pdf"><span style="border-bottom:0.05em solid">https://arxiv.org/pdf/1706.06969.pdf</span></a></p><p id="96371ffe-7156-4a72-a075-b58ab20c038d" class=""><a href="https://cs230.stanford.edu/blog/datapipeline/">Data pipelines</a></p><p id="8116e783-e88f-4ad8-82a7-7302c5659da9" class=""><a href="https://blog.tensorflow.org/2021/01/ml-metadata-version-control-for-ml.html">Data lineage</a></p><p id="e7c492bf-267a-401c-8a92-5fdde265d641" class=""><a href="https://cloud.google.com/blog/products/ai-machine-learning/key-requirements-for-an-mlops-foundation">MLops</a></p><p id="1fe38fcc-a09b-4a89-9f55-37d9f5a84618" class="">Geirhos, R., Janssen, D. H. J., Schutt, H. H., Rauber, J., Bethge, M., &amp; Wichmann, F. A. (n.d.). Comparing deep neural networks against humans: object recognition when the signal gets weaker∗. Retrieved May 7, 2021, from Arxiv.org website:</p></div></div></article></body></html>
