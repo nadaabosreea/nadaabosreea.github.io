@@ -1,0 +1,766 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Natural Language Processing with Transformers, Revised Edition</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="62f7d163-ac2f-4c02-ab03-da1c0dd77920" class="page sans"><header><img class="page-cover-image" src="https://www.notion.so/images/page-cover/woodcuts_1.jpg" style="object-position:center 90%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">👾</span></div><h1 class="page-title"><strong>Natural Language Processing with Transformers, Revised Edition</strong></h1><table class="properties"><tbody><tr class="property-row property-row-status"><th><span class="icon property-icon"><svg viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesStatus"><path d="M8.75488 1.02344C8.75488 0.613281 8.41309 0.264648 8.00293 0.264648C7.59277 0.264648 7.25098 0.613281 7.25098 1.02344V3.11523C7.25098 3.51855 7.59277 3.86719 8.00293 3.86719C8.41309 3.86719 8.75488 3.51855 8.75488 3.11523V1.02344ZM3.91504 5.0293C4.20215 5.31641 4.69434 5.32324 4.97461 5.03613C5.26855 4.74902 5.26855 4.25684 4.98145 3.96973L3.53906 2.52051C3.25195 2.2334 2.7666 2.21973 2.47949 2.50684C2.19238 2.79395 2.18555 3.28613 2.47266 3.57324L3.91504 5.0293ZM10.9629 4.01758C10.6826 4.30469 10.6826 4.79688 10.9697 5.08398C11.2568 5.37109 11.749 5.36426 12.0361 5.07715L13.4854 3.62793C13.7725 3.34082 13.7725 2.84863 13.4785 2.55469C13.1982 2.27441 12.7061 2.27441 12.4189 2.56152L10.9629 4.01758ZM15.0234 8.78906C15.4336 8.78906 15.7822 8.44727 15.7822 8.03711C15.7822 7.62695 15.4336 7.28516 15.0234 7.28516H12.9385C12.5283 7.28516 12.1797 7.62695 12.1797 8.03711C12.1797 8.44727 12.5283 8.78906 12.9385 8.78906H15.0234ZM0.975586 7.28516C0.56543 7.28516 0.223633 7.62695 0.223633 8.03711C0.223633 8.44727 0.56543 8.78906 0.975586 8.78906H3.07422C3.48438 8.78906 3.83301 8.44727 3.83301 8.03711C3.83301 7.62695 3.48438 7.28516 3.07422 7.28516H0.975586ZM12.0361 10.9902C11.749 10.71 11.2568 10.71 10.9629 10.9971C10.6826 11.2842 10.6826 11.7764 10.9697 12.0635L12.4258 13.5127C12.7129 13.7998 13.2051 13.793 13.4922 13.5059C13.7793 13.2256 13.7725 12.7266 13.4854 12.4395L12.0361 10.9902ZM2.52051 12.4395C2.22656 12.7266 2.22656 13.2188 2.50684 13.5059C2.79395 13.793 3.28613 13.7998 3.57324 13.5127L5.02246 12.0703C5.31641 11.7832 5.31641 11.291 5.03613 11.0039C4.74902 10.7168 4.25684 10.71 3.96973 10.9971L2.52051 12.4395ZM8.75488 12.9658C8.75488 12.5557 8.41309 12.207 8.00293 12.207C7.59277 12.207 7.25098 12.5557 7.25098 12.9658V15.0576C7.25098 15.4609 7.59277 15.8096 8.00293 15.8096C8.41309 15.8096 8.75488 15.4609 8.75488 15.0576V12.9658Z"></path></svg></span>Status</th><td><span class="status-value select-value-color-blue"><div class="status-dot status-dot-color-blue"></div>In Progress</span></td></tr><tr class="property-row property-row-person"><th><span class="icon property-icon"><svg viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesPerson"><path d="M10.9536 7.90088C12.217 7.90088 13.2559 6.79468 13.2559 5.38525C13.2559 4.01514 12.2114 2.92017 10.9536 2.92017C9.70142 2.92017 8.65137 4.02637 8.65698 5.39087C8.6626 6.79468 9.69019 7.90088 10.9536 7.90088ZM4.4231 8.03003C5.52368 8.03003 6.42212 7.05859 6.42212 5.83447C6.42212 4.63843 5.51245 3.68945 4.4231 3.68945C3.33374 3.68945 2.41846 4.64966 2.41846 5.84009C2.42407 7.05859 3.32251 8.03003 4.4231 8.03003ZM1.37964 13.168H5.49561C4.87231 12.292 5.43384 10.6074 6.78711 9.51807C6.18628 9.14746 5.37769 8.87231 4.4231 8.87231C1.95239 8.87231 0.262207 10.6917 0.262207 12.1628C0.262207 12.7974 0.548584 13.168 1.37964 13.168ZM7.50024 13.168H14.407C15.4009 13.168 15.7322 12.8423 15.7322 12.2864C15.7322 10.8489 13.8679 8.88354 10.9536 8.88354C8.04492 8.88354 6.17505 10.8489 6.17505 12.2864C6.17505 12.8423 6.50635 13.168 7.50024 13.168Z"></path></svg></span>Assign</th><td><span class="user"><img src="https://lh3.googleusercontent.com/a/AEdFTp5GQgEfwpvN2gSnLXHQHvlEwMmn9Xo1l_2yiPkk=s100" class="icon user-icon"/>nada essam</span></td></tr><tr class="property-row property-row-date"><th><span class="icon property-icon"><svg viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesDate"><path d="M3.29688 14.4561H12.7031C14.1797 14.4561 14.9453 13.6904 14.9453 12.2344V3.91504C14.9453 2.45215 14.1797 1.69336 12.7031 1.69336H3.29688C1.82031 1.69336 1.05469 2.45215 1.05469 3.91504V12.2344C1.05469 13.6973 1.82031 14.4561 3.29688 14.4561ZM3.27637 13.1162C2.70898 13.1162 2.39453 12.8154 2.39453 12.2207V5.9043C2.39453 5.30273 2.70898 5.00879 3.27637 5.00879H12.71C13.2842 5.00879 13.6055 5.30273 13.6055 5.9043V12.2207C13.6055 12.8154 13.2842 13.1162 12.71 13.1162H3.27637ZM6.68066 7.38086H7.08398C7.33008 7.38086 7.41211 7.30566 7.41211 7.05957V6.66309C7.41211 6.41699 7.33008 6.3418 7.08398 6.3418H6.68066C6.44141 6.3418 6.35938 6.41699 6.35938 6.66309V7.05957C6.35938 7.30566 6.44141 7.38086 6.68066 7.38086ZM8.92285 7.38086H9.31934C9.56543 7.38086 9.64746 7.30566 9.64746 7.05957V6.66309C9.64746 6.41699 9.56543 6.3418 9.31934 6.3418H8.92285C8.67676 6.3418 8.59473 6.41699 8.59473 6.66309V7.05957C8.59473 7.30566 8.67676 7.38086 8.92285 7.38086ZM11.1582 7.38086H11.5547C11.8008 7.38086 11.8828 7.30566 11.8828 7.05957V6.66309C11.8828 6.41699 11.8008 6.3418 11.5547 6.3418H11.1582C10.9121 6.3418 10.8301 6.41699 10.8301 6.66309V7.05957C10.8301 7.30566 10.9121 7.38086 11.1582 7.38086ZM4.44531 9.58203H4.84863C5.09473 9.58203 5.17676 9.50684 5.17676 9.26074V8.86426C5.17676 8.61816 5.09473 8.54297 4.84863 8.54297H4.44531C4.20605 8.54297 4.12402 8.61816 4.12402 8.86426V9.26074C4.12402 9.50684 4.20605 9.58203 4.44531 9.58203ZM6.68066 9.58203H7.08398C7.33008 9.58203 7.41211 9.50684 7.41211 9.26074V8.86426C7.41211 8.61816 7.33008 8.54297 7.08398 8.54297H6.68066C6.44141 8.54297 6.35938 8.61816 6.35938 8.86426V9.26074C6.35938 9.50684 6.44141 9.58203 6.68066 9.58203ZM8.92285 9.58203H9.31934C9.56543 9.58203 9.64746 9.50684 9.64746 9.26074V8.86426C9.64746 8.61816 9.56543 8.54297 9.31934 8.54297H8.92285C8.67676 8.54297 8.59473 8.61816 8.59473 8.86426V9.26074C8.59473 9.50684 8.67676 9.58203 8.92285 9.58203ZM11.1582 9.58203H11.5547C11.8008 9.58203 11.8828 9.50684 11.8828 9.26074V8.86426C11.8828 8.61816 11.8008 8.54297 11.5547 8.54297H11.1582C10.9121 8.54297 10.8301 8.61816 10.8301 8.86426V9.26074C10.8301 9.50684 10.9121 9.58203 11.1582 9.58203ZM4.44531 11.7832H4.84863C5.09473 11.7832 5.17676 11.708 5.17676 11.4619V11.0654C5.17676 10.8193 5.09473 10.7441 4.84863 10.7441H4.44531C4.20605 10.7441 4.12402 10.8193 4.12402 11.0654V11.4619C4.12402 11.708 4.20605 11.7832 4.44531 11.7832ZM6.68066 11.7832H7.08398C7.33008 11.7832 7.41211 11.708 7.41211 11.4619V11.0654C7.41211 10.8193 7.33008 10.7441 7.08398 10.7441H6.68066C6.44141 10.7441 6.35938 10.8193 6.35938 11.0654V11.4619C6.35938 11.708 6.44141 11.7832 6.68066 11.7832ZM8.92285 11.7832H9.31934C9.56543 11.7832 9.64746 11.708 9.64746 11.4619V11.0654C9.64746 10.8193 9.56543 10.7441 9.31934 10.7441H8.92285C8.67676 10.7441 8.59473 10.8193 8.59473 11.0654V11.4619C8.59473 11.708 8.67676 11.7832 8.92285 11.7832Z"></path></svg></span>Due</th><td><time>@January 16, 2023</time></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M7.69922 10.8945L8.73828 9.84863C7.91797 9.77344 7.34375 9.51367 6.91992 9.08984C5.76465 7.93457 5.76465 6.29395 6.91309 5.14551L9.18262 2.87598C10.3379 1.7207 11.9717 1.7207 13.127 2.87598C14.2891 4.04492 14.2822 5.67188 13.1338 6.82031L11.958 7.99609C12.1768 8.49512 12.2451 9.10352 12.1289 9.62988L14.0908 7.6748C15.7725 6 15.7793 3.62109 14.084 1.92578C12.3887 0.223633 10.0098 0.237305 8.33496 1.91211L5.95605 4.29785C4.28125 5.97266 4.26758 8.35156 5.96289 10.0469C6.36621 10.4434 6.90625 10.7441 7.69922 10.8945ZM8.30078 5.13184L7.26855 6.17773C8.08203 6.25293 8.66309 6.51953 9.08008 6.93652C10.2422 8.09863 10.2422 9.73242 9.08691 10.8809L6.81738 13.1504C5.66211 14.3057 4.03516 14.3057 2.87305 13.1504C1.71094 11.9883 1.71777 10.3545 2.87305 9.20605L4.04199 8.03027C3.83008 7.53125 3.75488 6.92969 3.87109 6.39648L1.91602 8.35156C0.234375 10.0264 0.227539 12.4121 1.92285 14.1074C3.61816 15.8027 5.99707 15.7891 7.67188 14.1143L10.0439 11.7354C11.7256 10.0537 11.7324 7.6748 10.0371 5.98633C9.64062 5.58301 9.10059 5.28223 8.30078 5.13184Z"></path></svg></span>Notes</th><td><a href="These are notes for the Huggingface transformer book that encapsulate the concepts presented" class="url-value">These are notes for the Huggingface transformer book that encapsulate the concepts presented</a></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M1.91602 4.83789C2.44238 4.83789 2.87305 4.40723 2.87305 3.87402C2.87305 3.34766 2.44238 2.91699 1.91602 2.91699C1.38281 2.91699 0.952148 3.34766 0.952148 3.87402C0.952148 4.40723 1.38281 4.83789 1.91602 4.83789ZM5.1084 4.52344H14.3984C14.7607 4.52344 15.0479 4.23633 15.0479 3.87402C15.0479 3.51172 14.7607 3.22461 14.3984 3.22461H5.1084C4.74609 3.22461 4.45898 3.51172 4.45898 3.87402C4.45898 4.23633 4.74609 4.52344 5.1084 4.52344ZM1.91602 9.03516C2.44238 9.03516 2.87305 8.60449 2.87305 8.07129C2.87305 7.54492 2.44238 7.11426 1.91602 7.11426C1.38281 7.11426 0.952148 7.54492 0.952148 8.07129C0.952148 8.60449 1.38281 9.03516 1.91602 9.03516ZM5.1084 8.7207H14.3984C14.7607 8.7207 15.0479 8.43359 15.0479 8.07129C15.0479 7.70898 14.7607 7.42188 14.3984 7.42188H5.1084C4.74609 7.42188 4.45898 7.70898 4.45898 8.07129C4.45898 8.43359 4.74609 8.7207 5.1084 8.7207ZM1.91602 13.2324C2.44238 13.2324 2.87305 12.8018 2.87305 12.2686C2.87305 11.7422 2.44238 11.3115 1.91602 11.3115C1.38281 11.3115 0.952148 11.7422 0.952148 12.2686C0.952148 12.8018 1.38281 13.2324 1.91602 13.2324ZM5.1084 12.918H14.3984C14.7607 12.918 15.0479 12.6309 15.0479 12.2686C15.0479 11.9062 14.7607 11.6191 14.3984 11.6191H5.1084C4.74609 11.6191 4.45898 11.9062 4.45898 12.2686C4.45898 12.6309 4.74609 12.918 5.1084 12.918Z"></path></svg></span>Tags</th><td><span class="selected-value select-value-color-green">Book</span></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M7.69922 10.8945L8.73828 9.84863C7.91797 9.77344 7.34375 9.51367 6.91992 9.08984C5.76465 7.93457 5.76465 6.29395 6.91309 5.14551L9.18262 2.87598C10.3379 1.7207 11.9717 1.7207 13.127 2.87598C14.2891 4.04492 14.2822 5.67188 13.1338 6.82031L11.958 7.99609C12.1768 8.49512 12.2451 9.10352 12.1289 9.62988L14.0908 7.6748C15.7725 6 15.7793 3.62109 14.084 1.92578C12.3887 0.223633 10.0098 0.237305 8.33496 1.91211L5.95605 4.29785C4.28125 5.97266 4.26758 8.35156 5.96289 10.0469C6.36621 10.4434 6.90625 10.7441 7.69922 10.8945ZM8.30078 5.13184L7.26855 6.17773C8.08203 6.25293 8.66309 6.51953 9.08008 6.93652C10.2422 8.09863 10.2422 9.73242 9.08691 10.8809L6.81738 13.1504C5.66211 14.3057 4.03516 14.3057 2.87305 13.1504C1.71094 11.9883 1.71777 10.3545 2.87305 9.20605L4.04199 8.03027C3.83008 7.53125 3.75488 6.92969 3.87109 6.39648L1.91602 8.35156C0.234375 10.0264 0.227539 12.4121 1.92285 14.1074C3.61816 15.8027 5.99707 15.7891 7.67188 14.1143L10.0439 11.7354C11.7256 10.0537 11.7324 7.6748 10.0371 5.98633C9.64062 5.58301 9.10059 5.28223 8.30078 5.13184Z"></path></svg></span>URL</th><td><a href="https://www.oreilly.com/library/view/natural-language-processing/9781098136789/" class="url-value">https://www.oreilly.com/library/view/natural-language-processing/9781098136789/</a></td></tr></tbody></table></header><div class="page-body"><h1 id="761b56bf-5898-4981-9398-de5d50a2f546" class=""><details open=""><summary>Chapter 1: Hello Transformers</summary></details></h1><div class="indented"><p id="4bf9eed3-e541-4db2-be2f-7a6ce6780434" class="">
+</p><ul id="e9a766bc-6dcb-4de4-b285-2a24bd12ea19" class="bulleted-list"><li style="list-style-type:disc">2017, the transformer paper was introduced, beating LSTM on machine translation</li></ul><ul id="e47eacc6-91ec-41ff-bdcf-a36b3e018ad9" class="bulleted-list"><li style="list-style-type:disc">at the same time, ULMFIT was introduced, showing the idea of transfer learning on LSTM networks </li></ul><ul id="9e5e3dbe-15ea-420e-9e44-194ab877bbc3" class="bulleted-list"><li style="list-style-type:disc">those two papers shaped today’s advancements, releasing GPT and BERT models as a result and other zoo of models</li></ul><figure id="4f7be565-397f-4ff5-94eb-eff6773e1015" class="image"><a href="Natural%20Language%20Processing%20with%20Transformers,%20Rev%2062f7d163ac2f4c02ab03da1c0dd77920/Untitled.png"><img style="width:600px" src="Natural%20Language%20Processing%20with%20Transformers,%20Rev%2062f7d163ac2f4c02ab03da1c0dd77920/Untitled.png"/></a></figure><ul id="17df74db-8dfd-4b15-81a9-0aef9e404e42" class="bulleted-list"><li style="list-style-type:disc">main concepts are:<ul id="c3348419-ca26-473d-bfab-c86ce17e147d" class="bulleted-list"><li style="list-style-type:circle">the encoder decoder framework</li></ul><ul id="2983dde5-c19e-4c78-a279-54e3472d05eb" class="bulleted-list"><li style="list-style-type:circle">attention mechanisms</li></ul><ul id="8558cad0-3b95-4555-8862-abaf5f1a4c1b" class="bulleted-list"><li style="list-style-type:circle">transfer learning</li></ul></li></ul><p id="b5dcb1c4-10c5-4bd1-a354-84d6d9a4d6a8" class="">
+</p><h2 id="adcf3661-bfde-465c-b090-437184308b9a" class="">The encoder decoder framework</h2><p id="d948dc43-8375-4b25-9fc9-9cef6f02346d" class="">take the example of machine translation → it needs an encoder decoder architecture</p><p id="01f06af0-e89d-4fe5-abe2-dec82b90cafe" class="">
+</p><figure id="374bc165-b901-40d3-af17-cbca61dd764d" class="image"><a href="Natural%20Language%20Processing%20with%20Transformers,%20Rev%2062f7d163ac2f4c02ab03da1c0dd77920/Untitled%201.png"><img style="width:600px" src="Natural%20Language%20Processing%20with%20Transformers,%20Rev%2062f7d163ac2f4c02ab03da1c0dd77920/Untitled%201.png"/></a></figure><p id="84ec4f66-65e7-4a45-85fe-fe9edeaf1502" class="">old architectures used LSTM networks for encoding and decoding passing a hidden state from the last layer of the encoder to the decoder creates an information bottleneck, this hidden state has to represent the meaning of the whole input sentence, it is especially challenging for long sequences</p><p id="77ea80f0-03ff-40a7-a648-71bc7315bb5a" class="">
+</p><p id="cdc8fc67-d290-45d6-9d4e-2680415140f6" class="">the solution to this is to allow the decoder to have access to all the decoder hidden states</p><p id="92abf5f3-8ed7-4f51-b230-1610eeea3c9a" class="">→ this is the general mechanism called attention</p><p id="4fca866b-cf96-4fd0-9068-950977706f96" class="">
+</p><h2 id="9f87d52f-3f44-43b1-a0c8-fc22f5866a33" class="">Attention</h2><p id="87d824f9-626f-4fa5-936d-17847e30cb1a" class="">
+</p><figure id="54985aec-b51c-49bd-a527-096b5166e321" class="image"><a href="Natural%20Language%20Processing%20with%20Transformers,%20Rev%2062f7d163ac2f4c02ab03da1c0dd77920/Untitled%202.png"><img style="width:600px" src="Natural%20Language%20Processing%20with%20Transformers,%20Rev%2062f7d163ac2f4c02ab03da1c0dd77920/Untitled%202.png"/></a></figure><p id="91f28aad-792a-4dc5-bbd7-425b6b0e36e3" class="">the idea is to give the all the hidden states of the encoder to all the layers of the decoder, but some mechanism needs to be be used to prioritize which states to use. so, attention lets the decoder assign different weights or attention to each of the encoder states at every decoding layer</p><p id="ff4bc3e7-2872-4752-9f42-ccbf07d5bba6" class="">ex. on this:</p><figure id="bb3f9681-da67-4bac-8f24-134e8819ce0c" class="image"><a href="Natural%20Language%20Processing%20with%20Transformers,%20Rev%2062f7d163ac2f4c02ab03da1c0dd77920/Untitled%203.png"><img style="width:600px" src="Natural%20Language%20Processing%20with%20Transformers,%20Rev%2062f7d163ac2f4c02ab03da1c0dd77920/Untitled%203.png"/></a></figure><p id="4cea3d00-73b2-40d9-9444-db42c6b3472e" class="">
+</p><p id="fa02f379-4120-4f9b-a6b6-aacab6d70f44" class="">but, LSTMs’ computations are sequential and can’t be parallelized, to solve this problem they removed recurrence and replaced it with “self-attention” (covered in chapter 3)</p><figure id="01e07fa3-fa10-47d3-972e-bfcef7d438ee" class="image"><a href="Natural%20Language%20Processing%20with%20Transformers,%20Rev%2062f7d163ac2f4c02ab03da1c0dd77920/Untitled%204.png"><img style="width:600px" src="Natural%20Language%20Processing%20with%20Transformers,%20Rev%2062f7d163ac2f4c02ab03da1c0dd77920/Untitled%204.png"/></a></figure><p id="858e76fb-8f5d-409d-ac38-f7bcd5c25a6e" class="">now both the encoder and the decoder have their own self-attention mechanisms, whose outputs are fed to feed-forward neural networks. This architecture can be trained much faster than recurrent models</p><p id="23be31c8-ae27-409e-bff9-226df4aa9cd9" class="">
+</p><h2 id="21f616eb-9c9b-42be-acfc-988fbee50a75" class="">Transfer Learning</h2><p id="ca92339b-6f32-4a89-8e5d-f36989fd2393" class="">Any model has 2 parts; body and head, the idea of transfer learning is to initialize the body of the network with other tasks’ weights and start training from these weights and attach a new head specific to the task in hand. so, it is like transferring the knowledge from that old task to the new task . that’s because the body’s weights have already learned broad features of the source domain, this achieves greater results than training from scratch. so, it is a must for any task.</p><p id="ce0fc791-5954-4885-9621-59a87ab9073a" class="">
+</p><p id="48ae6d5d-8849-4c9e-a96b-9e45a0d5fe51" class="">this was introduced by ULMFIT which consists of 3 steps:</p><ul id="b271d2e6-c1e5-4d0a-9a07-8a214d8a1a3c" class="bulleted-list"><li style="list-style-type:disc">pretraining (or language modelling) : using existing corpora like Wikipedia to train a network in a self-supervised way on casual learning → predicting the next word based on previous words</li></ul><ul id="51cbde4b-558b-4aae-8d06-67e31e0ed790" class="bulleted-list"><li style="list-style-type:disc">Domain Adaptation: start from these weights and do the same with the in-domain corpus</li></ul><ul id="2289c876-7077-4ba3-bb53-43189f2486ca" class="bulleted-list"><li style="list-style-type:disc">Fine-Tuning: the language model is fine-tuned with a classification layer for the target task</li></ul><figure id="a1991534-0634-4e59-b92c-cef40834c425" class="image"><a href="Natural%20Language%20Processing%20with%20Transformers,%20Rev%2062f7d163ac2f4c02ab03da1c0dd77920/Untitled%205.png"><img style="width:600px" src="Natural%20Language%20Processing%20with%20Transformers,%20Rev%2062f7d163ac2f4c02ab03da1c0dd77920/Untitled%205.png"/></a></figure><p id="fadacef9-3a2a-4a49-8556-c3c2ac36510f" class="">
+</p><p id="38dfbd86-8394-4877-a1e3-448ae7eee040" class="">
+</p><p id="db632e5c-7757-4a5a-a668-ace6b298b2b7" class="">In upcoming chapters many topics are discussed (applying the above concepts on them):</p><ul id="1cdade35-2db4-4082-9887-28a3f71f3c49" class="bulleted-list"><li style="list-style-type:disc">text Classification</li></ul><ul id="e73ffdd4-cb04-4be7-b1a8-8ac96bd6a65e" class="bulleted-list"><li style="list-style-type:disc">named entity recognition</li></ul><ul id="ccce731e-0a1f-466b-b0d8-59850e81f02d" class="bulleted-list"><li style="list-style-type:disc">question answering</li></ul><ul id="cebd2ace-fb42-4f64-8d81-f282a6e795cc" class="bulleted-list"><li style="list-style-type:disc">summarization</li></ul><ul id="93f99433-bae4-4661-9c76-4ae4fd36cc64" class="bulleted-list"><li style="list-style-type:disc">translation</li></ul><ul id="de97b542-8651-4df0-86c9-daa09e7e9585" class="bulleted-list"><li style="list-style-type:disc">text generation</li></ul><p id="c12e16c9-43a9-4e86-99ff-e862915295e9" class="">
+</p><p id="d23fd91e-efb4-4163-b4fa-6e9277a90f4e" class="">
+</p></div><h1 id="a36d6f83-c359-40ce-afca-83ebf372ac4a" class=""><details open=""><summary>Chapter 2: Text Classification</summary></details></h1><div class="indented"><figure id="51352c99-5764-42a8-87c8-ca01d26a9641" class="image"><a href="Natural%20Language%20Processing%20with%20Transformers,%20Rev%2062f7d163ac2f4c02ab03da1c0dd77920/Untitled%206.png"><img style="width:600px" src="Natural%20Language%20Processing%20with%20Transformers,%20Rev%2062f7d163ac2f4c02ab03da1c0dd77920/Untitled%206.png"/></a></figure><p id="e0f670ae-eae0-4058-b726-68b50425a4d3" class="">in this chapter, the main libraries in 🤗 are going to be used to classify emotions (using DistilBERT).</p><p id="c66c4eef-e2d9-4acb-913e-2bd40082e527" class="">
+</p><p id="6aaf1ebd-b660-46e7-bd13-ed9bff776d17" class="">Datasets is based on Apache Arrow, which defines a typed columnar format that is more memory efficient than native Python.</p><p id="87a00192-b7bc-4f49-a25f-85f5cbf0b566" class="">
+</p><p id="33935e07-0b82-4788-8e80-6db37715b8eb" class="">🤗datasets can be converted to dataframes  to ease dealing with the dataset</p><p id="8c6411c8-96fb-436f-b608-69624889a7a2" class="">
+</p><p id="76c4107e-b60a-4165-806d-4b9bbae28de1" class="">steps:</p><p id="490c1298-7ec1-4a80-8145-9737135ba491" class="">1- load the dataset from the 🤗hub or a local csv/text file</p><p id="4751297b-2401-4548-a67f-d948e4e95588" class="">2- do some analysis on the data to see the distribution of the length of the sentences and the frequency of each class</p><p id="02990afe-cc97-4eb8-8667-690f39a8aa0f" class="">3- tokenize: split the text into parts to represent by numbers (numericalization) and then one-hot encoded vectors → can be done in one of 3 ways<div class="indented"><ul id="91dea2cf-64c3-4f67-9653-69acf84bdaf1" class="bulleted-list"><li style="list-style-type:disc">character tokenization</li></ul><ul id="1a9f9cd2-7847-4cad-899a-5942061240a4" class="bulleted-list"><li style="list-style-type:disc">word tokenization</li></ul><ul id="18e64758-46ea-4b77-b353-a1c0e3627018" class="bulleted-list"><li style="list-style-type:disc">subword tokenization</li></ul><p id="b2f45dd0-5448-40a5-b7de-33c6e09c20ab" class="">-subword tokenization is the one used all the time due to its benefits, it is learned
+from the pretraining corpus using a mix of statistical rules and algorithms.</p><p id="b4938972-266e-4e0d-a61e-5193396ca812" class="">-when using a pretrained model, you need to load its tokenizer </p><p id="a9e53d3e-5704-49cb-8412-406cab821580" class="">-use map() function to tokenize the whole dataset</p></div></p><p id="0a0b91a0-5eee-4776-a4c3-47e1b9f04b6e" class="">4- Training a Text Classifier:<div class="indented"><figure id="c1e106d0-0496-4d6e-bc99-03f155c2dfe5" class="image"><a href="Natural%20Language%20Processing%20with%20Transformers,%20Rev%2062f7d163ac2f4c02ab03da1c0dd77920/Untitled%207.png"><img style="width:600px" src="Natural%20Language%20Processing%20with%20Transformers,%20Rev%2062f7d163ac2f4c02ab03da1c0dd77920/Untitled%207.png"/></a></figure><p id="c2692532-97c3-40dc-a4ee-69d56465e4f0" class="">-token encodings: one hot encoded vectors of the vocab</p><p id="8b58d676-4f7d-4df9-8414-220390af0ef5" class="">-token embedding: a lower dimensional space that the encodings are converted to </p><p id="1fea447a-87c8-437a-9b81-232efa784248" class=""> -encoder stack: outputs the hidden states</p><p id="2b358311-ba2f-4fe0-9a86-9eefb25020f6" class="">-classification head</p><p id="bc656fb3-bb42-431d-97ea-2bffa606c129" class="">
+</p><p id="4a21b026-e132-424d-9140-511b8345272f" class="">-we have 2 options:<div class="indented"><ul id="b3bc51a5-9b6d-4e0a-bebf-94c9f27bd3be" class="bulleted-list"><li style="list-style-type:disc">using the body as a feature extraction network and then training a simple classifier on the embedding to classify the emotions</li></ul><ul id="97ee6a1a-4b75-423f-b9dd-dd27b0653cac" class="bulleted-list"><li style="list-style-type:disc">fine-tuning: start with a pretrained model, load its weights and train the model</li></ul></div></p></div></p><p id="1cd71c11-90ca-4f13-a63d-4c521538d382" class="">5- do error analysis<div class="indented"><p id="3b9ac97a-f1e8-4a54-86f0-c1bb4ff30058" class="">
+</p></div></p><p id="1a2c53b3-dffb-494c-9bbe-ade0d09c3bfa" class="">
+</p></div><h1 id="f5d8e14c-9e56-4ea1-a283-d5a4b215e9d5" class=""><details open=""><summary>Chapter 3: Transformer Anatomy*</summary></details></h1><div class="indented"><figure id="c2361695-e1df-43e3-89f6-bdd840f17db7" class="image"><a href="Natural%20Language%20Processing%20with%20Transformers,%20Rev%2062f7d163ac2f4c02ab03da1c0dd77920/Untitled%208.png"><img style="width:600px" src="Natural%20Language%20Processing%20with%20Transformers,%20Rev%2062f7d163ac2f4c02ab03da1c0dd77920/Untitled%208.png"/></a></figure><p id="2d9f9612-8f0e-437e-9556-903d97089d4d" class="">
+</p><p id="9525e402-a429-4d49-9929-1eaef7a76f5b" class="">for an encoder decoder architecture, the whole process is as follows:</p><p id="89a05223-4419-4395-8c88-a9a47ef623b8" class="">1- input text → tokenization and token encoding → token embeddings + positional embeddings (because the networks need a way to know the relative position of each token), both are added together</p><p id="24682938-e4b7-48d1-b4ce-0e13407895d7" class="">2- embeddings are passed to a stack of encoding layers and outputs hidden states</p><p id="0d12bbc0-7905-4008-b75a-d58910726539" class="">3- these hidden states are passed to the decoder and the decoder outputs the next most probable token, this token is passed along with the hidden states to get the next token , and so on.</p><p id="3ffd9a89-7dec-4eac-8891-3cc6c61c35d2" class="">
+</p><p id="0e45d724-8e3c-4696-9156-5b84dffa8960" class="">the encoder and decoder can be adapted as separate networks:</p><p id="a17f1de3-7430-44b2-854c-073ad62083f9" class="">1- encoder only: classification</p><p id="8258d2de-7fb8-4f03-9867-3f82477ba400" class="">2- decoder only: text generation</p><p id="a5b3aa6c-9caf-479f-8080-23a495eb0936" class="">3- encoder decoder: machine translation and summarization</p><p id="af0ceefe-41d7-4715-a505-f78c86689429" class="">
+</p><h2 id="8075a704-d2af-4d75-a92c-8f33538f66dd" class="">The Encoder Architecture</h2><figure id="c78c7d70-3e7f-4b1c-9ef5-dadb998d485f" class="image"><a href="Natural%20Language%20Processing%20with%20Transformers,%20Rev%2062f7d163ac2f4c02ab03da1c0dd77920/Untitled%209.png"><img style="width:600px" src="Natural%20Language%20Processing%20with%20Transformers,%20Rev%2062f7d163ac2f4c02ab03da1c0dd77920/Untitled%209.png"/></a></figure><p id="c8208377-f02b-4298-9676-c555dde99cf8" class="">
+</p><ul id="f211eb5d-2cad-4219-91cc-99460c8f76a9" class="bulleted-list"><li style="list-style-type:disc">the encoder consists of several encoder blocks each one feeding the next</li></ul><ul id="5be61122-0e10-404b-96ec-032472b2852c" class="bulleted-list"><li style="list-style-type:disc">each encoder block consists of 2 main parts multi-head self-attention and a feed forward layer that is applied to each input embedding. also, layer normalization and skip connection</li></ul><p id="3b39d0ca-29af-44d9-95ef-a02fe3d138f4" class="">
+</p><p id="60ab0ef3-e67f-4aa7-b772-1f3f53bf3554" class="">The multi-head self-attention</p><p id="efea849e-59f2-4d4b-9f3c-baecb6e3b26a" class="">
+</p><p id="3853b12f-cc47-4ba7-a3e6-eae475b60e9b" class="">
+</p><p id="28378bcd-025a-4b08-b270-1afc52ac4292" class="">
+</p><p id="a2e25e15-e080-4997-bf2d-275f360bdce6" class="">
+</p><p id="26d985b8-9ab4-4022-a79e-f890482cb2c8" class="">
+</p></div><h1 id="54f212e7-6bd7-4c4d-8ce9-dae9caf26a80" class=""><details open=""><summary>Chapter 4: Multilingual Named Entity Recognition</summary></details></h1><div class="indented"><p id="f18c48a4-9238-446c-bca1-c5dd9eed0b3d" class="">
+</p><p id="607e9f69-a6ca-4be1-a132-11d0a73e0a26" class="">in this chapter we explore how XLM-RoBERTa can be fine-tuned to perform NER on several languages → XLM-RoBERTa is pretrained with over a 100 languages making it suitable for zero-shot cross-lingual transfer. This means that a model that is fine-tuned on one language can be applied to others without any further training</p><p id="755ca1a7-14de-4909-81d9-1d67cfac2d96" class="">
+</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="f4eb441c-e488-42a9-9577-6e52538e2ad5"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Zero-shot transfer
+or
+zero-shot learning
+usually refers to the task of training a model on one set of labels and then evaluating it on a different set of labels. In the context of transformers, zero-shot learning may also refer to situations where a language model like GPT-3 is evaluated on a downstream task that it wasn’t even fine-tuned on.</div></figure><p id="96ee2c28-fd61-4668-9968-5de364637dd2" class="">
+</p><p id="c993c0fd-95a0-47ee-b006-634dc12b945b" class="">the dataset used is (XTREME) benchmark called WikiANN or PAN-X.
+This dataset consists of Wikipedia articles in many languages, including the four most commonly spoken languages in Switzerland: German (62.9%), French (22.9%),Italian (8.4%), and English (5.9%). Each article is annotated with LOC (location), PER (person), and ORG (organization) tags</p><p id="fcc7b308-2776-4777-83ab-4fe7d8b7916f" class="">
+</p><p id="fea2d96a-6128-404b-8f81-89a13716889b" class="">steps:</p><p id="c36048fa-cfa5-41ef-be37-69e9bfbca6ea" class="">1- load the dataset and explore the frequency of the 3 classes in all the splits</p><p id="adc30fa1-8455-4858-a27a-c9dfb97bd836" class="">2- load a multilingual transformer: same as a monolingual but pretrained on many languages at the same time and produce competitive results to the monolingual (even better sometimes)<div class="indented"><p id="2eba8e6e-454d-41bd-b179-5e44e6c7cc58" class="">we have 3 choices:</p><ul id="c7160812-1ddd-45c3-8b72-297439702452" class="bulleted-list"><li style="list-style-type:disc">fine-tune on English→ evaluate on each language</li></ul><ul id="24721bf7-cad3-446f-8b10-99b6f8c7c098" class="bulleted-list"><li style="list-style-type:disc">fine-tune on each and test on each</li></ul><ul id="5dd72038-d3d8-4801-b0f4-ee7dcecb68c1" class="bulleted-list"><li style="list-style-type:disc">fine-tune on all and evaluate on each</li></ul></div></p><p id="f85c100c-4d70-4549-988f-611412d89cb4" class="">3- the tokenizer: XLM-R tokenizer is SentencePiece which is trained on raw text of all 100 languages </p><figure id="71b8243c-e72f-433a-9c16-18aa24ea265d" class="image"><a href="Natural%20Language%20Processing%20with%20Transformers,%20Rev%2062f7d163ac2f4c02ab03da1c0dd77920/Untitled%2010.png"><img style="width:600px" src="Natural%20Language%20Processing%20with%20Transformers,%20Rev%2062f7d163ac2f4c02ab03da1c0dd77920/Untitled%2010.png"/></a></figure><p id="c82c829a-5748-4ff8-add8-c1f322ad7028" class="">the tokenization step consists of several inner steps:</p><ul id="ad1f509c-05e4-4ca5-a7bd-7be0c4760b67" class="bulleted-list"><li style="list-style-type:disc">normalization: make the text “cleaner”, strip whitespace, unicode normalization (same char can be written in different ways), lower-casing (can be used to reduce the size of the vocab)</li></ul><ul id="833271bb-90af-42b3-b066-9e9a7de48760" class="bulleted-list"><li style="list-style-type:disc">pretokenization: split on spaces or other chars to make it easy for the next step to deal with words instead of a sentence</li></ul><ul id="de96a41d-8c6e-429f-b3d9-828d115bc9fd" class="bulleted-list"><li style="list-style-type:disc">Tokenizer model: subword tokenization. This is the part of the pipeline that needs to be trained on your corpus (or that has been trained if you are using a pretrained tokenizer). Several subword tokenization algorithms exist, including BPE, Unigram, and WordPiece. we end up with a list of numbers</li></ul><ul id="38c3ab47-3d01-4d86-bbfb-41f82ea8fdec" class="bulleted-list"><li style="list-style-type:disc">postprocessing: adding any extra needed tokens to the list (CLS, SEP for ex.)</li></ul><p id="de15ed7a-d9d2-4a44-a745-3946c858e60f" class="">
+</p><p id="1bf4daa8-a52e-4693-9ec7-70e2e2fc9bc2" class="">SentencePiece:</p><p id="173e86d8-f5dd-42ac-9bda-6af038416c3f" class="">The SentencePiece tokenizer is based on a type of subword segmentation called Unigram and encodes each input text as a sequence of Unicode characters, </p><p id="28db85d2-f707-41b4-a126-94bab9bcb057" class="">
+</p><p id="9703d435-f87f-461b-bf29-0b1a084f6a0f" class="">Transformers for NER:</p><p id="fb530d42-dec1-4e5b-8f5f-43ce6eafbdd3" class="">[CLS] → token represents that a sequence of text follow</p><figure id="bfd2ac47-592d-48bc-8d13-3a65b95bc19a" class="image"><a href="Natural%20Language%20Processing%20with%20Transformers,%20Rev%2062f7d163ac2f4c02ab03da1c0dd77920/Untitled%2011.png"><img style="width:600px" src="Natural%20Language%20Processing%20with%20Transformers,%20Rev%2062f7d163ac2f4c02ab03da1c0dd77920/Untitled%2011.png"/></a></figure><p id="d2bba8c2-9a8e-4c88-90f6-4700655da9d7" class="">note: the label is assigned to the first subword and the other following subwords get assigned IGN label</p><p id="d480b0b3-2141-4f6e-aa45-a5f892024089" class="">
+</p><p id="3627197d-5064-4f06-920d-4379b4554b05" class="">Body and Head:</p><figure id="9bb2f33d-c950-4c42-b7bf-803aaa81ca95" class="image"><a href="Natural%20Language%20Processing%20with%20Transformers,%20Rev%2062f7d163ac2f4c02ab03da1c0dd77920/Untitled%2012.png"><img style="width:345px" src="Natural%20Language%20Processing%20with%20Transformers,%20Rev%2062f7d163ac2f4c02ab03da1c0dd77920/Untitled%2012.png"/></a></figure><p id="86c00d77-f0bb-4155-8814-5488e78e5abd" class="">this separation of bodies and heads allows us to build a custom head for any task and just mount it on top of a pretrained model</p><p id="2c1291e6-15c2-4116-9d4c-ed89b462943f" class="">
+</p><p id="2be2bd19-6fb7-45a5-8787-c4a4fd799bb0" class="">Fine-Tuning XLM-RoBERTa:</p><p id="1dd26e3b-5833-4ec4-846a-019609d83b36" class="">-finetune on german → evaluate on french, italian, english<div class="indented"><p id="fbea4859-4e69-4e79-a9a9-9e6c1b8342cc" class="">we ignore the ‘O’ (other class) in the evaluation because it will heavily skew the f1 score</p></div></p><p id="087d6937-7ddf-44ba-8dc1-70a0d805c92b" class="">-finetune on each → evaluate on each</p><p id="b4621ee9-0a0a-4989-b071-4a7b4f00ede0" class="">-fine tune on all → evaluate on all (gives the best performance because of cross-lingual similarities)</p></div><h1 id="635500db-50bf-4576-9dbc-635a9283bca8" class=""><details open=""><summary>Chapter 5: Text Generation</summary></details></h1><div class="indented"><figure id="444820c8-c594-4a7b-b0d6-5b28a4bc425a" class="image"><a href="Natural%20Language%20Processing%20with%20Transformers,%20Rev%2062f7d163ac2f4c02ab03da1c0dd77920/Untitled%2013.png"><img style="width:600px" src="Natural%20Language%20Processing%20with%20Transformers,%20Rev%2062f7d163ac2f4c02ab03da1c0dd77920/Untitled%2013.png"/></a></figure><p id="9fbcf3f1-1288-4e84-8191-eeefc1cef94b" class="">Since the output sequence is conditioned on the choice of input prompt, this type of text generation is often called conditional text generation
+</p><p id="733fcc30-0971-4ad2-a189-6455ec45da4a" class="">with text generation we need to de-code the output tokens one at a time.</p><p id="094e1c04-3d44-47ee-a5a1-a7aadab16186" class="">
+</p><p id="a7f64b07-ef05-43a4-867d-710af4590956" class="">Greedy Search Decoding:</p><p id="dcefa131-048f-43ff-9e29-00d3198c8628" class="">-we pick the highest probability token each time in a sequence</p><p id="df732e1b-41c5-4213-b6b9-c50d9e0bf5e6" class="">-a common problem with greedy search algorithms, which can fail to give you the optimal solution; in the context of decoding, they can miss word sequences whose overall probability is higher just because high-probability words happen to be preceded by low probability ones.</p><p id="d3643e7e-ea18-4478-bce0-53a0d22e986c" class="">-it can be useful for producing short sequences like arithmetic where a deterministic and factually correct output is preferred</p><p id="8e03e5a9-aa2f-45e3-83cf-f569d9ae00ae" class="">
+</p><p id="60c45553-c77c-4c3e-9974-2594cecf7d4e" class="">
+</p><p id="f05be5bf-9b3d-42d2-b6d6-f791ac80ab86" class="">Beam Search Decoding:</p><p id="1007b799-47c9-40f8-9d85-63204687353a" class="">Instead of decoding the token with the highest probability at each step, beam search keeps track of the top-b most probable next tokens, where b is referred to as the number of beams or partial hypotheses. 
+The next set of beams are chosen by considering all possible next-token extensions of the existing set and selecting the b most likely extensions. The process is repeated until we reach the maximum length or an EOS token, and the most likely sequence is selected by ranking the b beams according to their log probabilities.</p><figure id="a4329b30-6bae-45d8-b215-0badc7203096" class="image"><a href="Natural%20Language%20Processing%20with%20Transformers,%20Rev%2062f7d163ac2f4c02ab03da1c0dd77920/Untitled%2014.png"><img style="width:600px" src="Natural%20Language%20Processing%20with%20Transformers,%20Rev%2062f7d163ac2f4c02ab03da1c0dd77920/Untitled%2014.png"/></a></figure><p id="fb640fc4-adcb-424b-9791-df51be461e7b" class="">product of probabilities = sum of log probabilities</p><p id="2770953e-cbd7-4166-bbe0-434acc262c9f" class="">we use sum instead of product because multiplying small numbers together will underflow</p><p id="755ef134-65ee-49e5-a738-eb81b5579d0e" class="">
+</p><p id="65406e4c-8e37-4490-a003-dc8455ed7005" class="">Important parameters:</p><p id="613382fb-862a-418f-a010-b6a5041bfdf7" class="">1- no_repeat_ngram_size: to reduce repeated text</p><p id="55a5ed71-cc44-4414-af64-7cf0865786f5" class="">
+</p><p id="58cfd2d1-0fa4-49fc-8966-81202a7ff5fb" class="">Sampling methods (to generate more creative and longer text):</p><p id="c725f0a0-ad3d-4cac-8e93-8fac8155e589" class="">2- temperature: it allows us to control the quality of the samples, but there’s always a trade-off between coherence (low temperature) and diversity (high temperature) that one has to tune to the use case at hand. </p><figure id="ab9b86f0-36b8-4c07-a395-aa448ce5c380" class="image"><a href="Natural%20Language%20Processing%20with%20Transformers,%20Rev%2062f7d163ac2f4c02ab03da1c0dd77920/Untitled%2015.png"><img style="width:409px" src="Natural%20Language%20Processing%20with%20Transformers,%20Rev%2062f7d163ac2f4c02ab03da1c0dd77920/Untitled%2015.png"/></a></figure><p id="e6e8b314-188e-454c-81eb-e9b1e235eea2" class="">By tuning it we control the shape of the distribution, when T &lt; 1 rare tokens are suppressed, when T &gt; 1 tokens become equally likely.</p><p id="41a67736-e451-40db-861f-f1160b6902a4" class="">
+</p><p id="68f189f6-a763-4c48-ab64-5771c6579c66" class="">
+</p><p id="0effc662-1084-4e08-bd28-fbf958aa4b71" class="">3- top-k and top-p (nucleus sampling): restrict the number of tokens we can sample from at each timestep by removing less likely tokens</p><figure id="98349c39-ff90-4b32-847c-67d402e9162c" class="image"><a href="Natural%20Language%20Processing%20with%20Transformers,%20Rev%2062f7d163ac2f4c02ab03da1c0dd77920/Untitled%2016.png"><img style="width:600px" src="Natural%20Language%20Processing%20with%20Transformers,%20Rev%2062f7d163ac2f4c02ab03da1c0dd77920/Untitled%2016.png"/></a></figure><p id="54c2653b-c9e0-4f40-af8e-593d6ea9f1e0" class="">
+</p><p id="5cedec3f-d78d-45b8-966b-8fc009a041b2" class="">The idea behind top-k sampling is to avoid the low-probability choices by only sampling from the k
+tokens with the highest probability</p><p id="3f7b5f05-da18-4c8a-af08-397c93100ba6" class="">An alternative is to use a dynamic cutoff. With nucleus or top-p sampling, instead of choosing a fixed cutoff value, we set a condition of when to cut off. This condition is when a certain probability mass in the selection is reached. say 95%</p><p id="ed55c62e-8283-4a42-9e94-e8590a129605" class="">
+</p></div><h1 id="491c0d87-31b6-4170-9502-22a2f2991b66" class=""><details open=""><summary>Chapter 6: Summarization</summary></details></h1><div class="indented"><p id="18b47cbf-7410-441c-851c-09a7d43f72b8" class="">-It is a sequence-to-sequence task, solved using encoder-decoder architectures</p><p id="6df37d76-8c55-4ed1-baf1-b58922da1b0b" class="">-our example dataset is the CNN/DailyMail corpus → it consists of around 300,000 pairs of news articles and their corresponding summaries</p><p id="6f30faac-e824-451f-8d64-01dd30b8116e" class="">-the articles are mostly longer than 10,000 tokens, which is our limit. we deal with this by truncating longer text</p><p id="c5e34110-3ccb-4c0f-93de-4e1f3ba29aa0" class="">-(NLTK) package includes a sophisticated algorithm that can differentiate the end of a sentence from punctuation that occurs in abbreviations like U.S.</p><p id="f2d02a7b-d633-47ad-b7a3-c47f8079d34c" class="">
+</p><p id="c9dc7711-1411-4bdf-8cf2-3ff3ca22724a" class="">Comparing GPT-2, T5, BART, PEGASUS (each can be used for summarization)</p><p id="a773a90a-60d4-4113-8dee-6d7348ff96b2" class="">-GPT-2 can summarize text if given the expression “TL;DR” (too long; didn’t read)</p><p id="615926fc-3f7b-4c3d-8f01-517749667c00" class="">-T5: &quot;summarize: &lt;ARTICLE&gt;” gives a summarization</p><figure id="96dbdb41-0731-4f4f-85f1-176df6c60c39" class="image"><a href="Natural%20Language%20Processing%20with%20Transformers,%20Rev%2062f7d163ac2f4c02ab03da1c0dd77920/Untitled%2017.png"><img style="width:600px" src="Natural%20Language%20Processing%20with%20Transformers,%20Rev%2062f7d163ac2f4c02ab03da1c0dd77920/Untitled%2017.png"/></a></figure><p id="9faa3807-a6d5-4661-adc7-b68d2feffabd" class="">-BART: has been specifically fine-tuned on the CNN/DailyMail dataset</p><p id="5f70b5d1-1d94-4d0e-b0a0-c29dada7e785" class="">-PEGASUS: predicts masked sentences in multisentence texts.</p><figure id="f628cd92-3035-4480-9fb8-42d2d997b0ff" class="image"><a href="Natural%20Language%20Processing%20with%20Transformers,%20Rev%2062f7d163ac2f4c02ab03da1c0dd77920/Untitled%2018.png"><img style="width:600px" src="Natural%20Language%20Processing%20with%20Transformers,%20Rev%2062f7d163ac2f4c02ab03da1c0dd77920/Untitled%2018.png"/></a></figure><p id="a38df723-dd50-4e9c-af35-076c324b9ac0" class="">
+</p><p id="e21d7799-36b8-4918-876b-19f2ee40c557" class="">
+</p><p id="c67e0bdf-1567-4252-86f2-ca941663ac00" class="">Metrics to measure the quality of generated text (BLEU and ROUGE):</p><p id="10a9781a-71eb-47b4-b21d-54aa994170df" class="">
+</p><p id="75021e3e-4d71-487c-873a-982647260caf" class=""><mark class="highlight-orange">BLUE:</mark></p><p id="24c72127-2a68-41f6-af2b-dc5ecc1472d3" class="">-we look at words or n-grams. BLEU is a precision-based metric, which means that when we compare the two texts we count the number of words in the generation that occur in the reference and divide it by the length of the generation.</p><p id="d72c21db-ebb7-4f43-a6cf-e48b220f5328" class="">-a word is only counted as many times as it occurs in the reference (clip).</p><p id="53c6f0a9-108b-4627-9345-db9505c5d9e5" class="">-the BLEU-4 score is often reported</p><p id="fd1b6807-a2f7-4cc4-a6f3-9d9c6cba09c8" class="">-The BLEU score is widely used for evaluating text, especially in machine translation, since precise translations are usually favored over translations that include all possible and appropriate words.</p><p id="63ccc8c7-c2a0-482c-b4c1-b8dd9b8447c9" class="">equation:</p><figure id="5b6fd302-26ce-4909-b5fd-666c5312b385" class="image"><a href="Natural%20Language%20Processing%20with%20Transformers,%20Rev%2062f7d163ac2f4c02ab03da1c0dd77920/Untitled%2019.png"><img style="width:455px" src="Natural%20Language%20Processing%20with%20Transformers,%20Rev%2062f7d163ac2f4c02ab03da1c0dd77920/Untitled%2019.png"/></a></figure><figure id="51bd145d-ee12-4e60-8ed0-c12f9c3e9dcb" class="image"><a href="Natural%20Language%20Processing%20with%20Transformers,%20Rev%2062f7d163ac2f4c02ab03da1c0dd77920/Untitled%2020.png"><img style="width:268px" src="Natural%20Language%20Processing%20with%20Transformers,%20Rev%2062f7d163ac2f4c02ab03da1c0dd77920/Untitled%2020.png"/></a></figure><figure id="65b83c5f-c7cf-4965-8e10-34f158f526d0" class="image"><a href="Natural%20Language%20Processing%20with%20Transformers,%20Rev%2062f7d163ac2f4c02ab03da1c0dd77920/Untitled%2021.png"><img style="width:330px" src="Natural%20Language%20Processing%20with%20Transformers,%20Rev%2062f7d163ac2f4c02ab03da1c0dd77920/Untitled%2021.png"/></a></figure><p id="f02103fe-8844-47fa-9f97-e972401bce1b" class="">brevity penalty (BR) is a penalty term added because the metric favors short generations over long ones since they are more precise</p><p id="d49b8050-b80d-4a7c-b557-7a23694a4a49" class="">-in summarization we favor high recall because we want all the important information to be present. so, ROUGE is better in this situation.</p><p id="f45a2f9c-4326-4cbc-9927-8cb0df25f97e" class="">
+</p><p id="b31ae251-8453-416d-9642-007ec69f713f" class=""><mark class="highlight-purple">ROUGE:</mark></p><p id="d7e68ebb-d1d2-4ec6-97a8-6ce9f4bb5f62" class="">-specially developed for tasks like summarization</p><p id="344fb7cc-55aa-43d1-8999-9b19f2285c1a" class="">-assesses the recall</p><p id="86f7808d-9c3c-4a46-9edd-93141e1fbf10" class="">-with ROUGE we check how many n-grams in the reference text occur in the generated text.</p><figure id="d7aac23e-7422-4466-93a8-cb01ee149c34" class="image"><a href="Natural%20Language%20Processing%20with%20Transformers,%20Rev%2062f7d163ac2f4c02ab03da1c0dd77920/Untitled%2022.png"><img style="width:581px" src="Natural%20Language%20Processing%20with%20Transformers,%20Rev%2062f7d163ac2f4c02ab03da1c0dd77920/Untitled%2022.png"/></a></figure><p id="05b15d73-28dd-4110-b583-787bf77c51f3" class="">original ROUGE calculation</p><p id="6fb54dba-599d-4fc5-9955-c542afc3d278" class="">-BLEU and ROUGE can form the f1 score using the harmonic mean for both and this f1 score is the updated ROUGE calculation</p><p id="87fd92d1-14df-4f03-bfa6-48db2148c3fa" class="">-another one is <mark class="highlight-purple">ROUGE-L</mark> which measures the longest common substring LCS, so we measure normalized LCS for both prediction and reference and take the f1 score</p><figure id="52a3f1d1-cf8d-471d-a5ed-8ee37b0f112e" class="image"><a href="Natural%20Language%20Processing%20with%20Transformers,%20Rev%2062f7d163ac2f4c02ab03da1c0dd77920/Untitled%2023.png"><img style="width:538px" src="Natural%20Language%20Processing%20with%20Transformers,%20Rev%2062f7d163ac2f4c02ab03da1c0dd77920/Untitled%2023.png"/></a></figure><p id="af3993a0-2e59-4798-80b2-171d3a9366c9" class="">-two variations of ROUGE are calculated: one calculates the score per sentence and averages it for the summaries (ROUGE-L), and the other calculates it directly over the whole summary (ROUGE-Lsum).</p><p id="95f12385-2e39-4870-9864-978cc2d9da9c" class="">-higher is better</p><p id="c47d2b53-f4ba-43d3-9c7b-4c86ea7bfd20" class="">
+</p><p id="6d19f925-47ee-4bc3-a30a-339e47650d33" class=""><mark class="highlight-blue">Gradient accumulation:</mark></p><p id="1de4e6fe-d690-4f5d-97e1-cc320886d26d" class="">gradient_accumulation_steps is a training argument in TrainingArguments, it gives us the ability to use any batch size we want without worrying about GPU space, because as the name suggests the gradients are accumulated until we reach the desired batch size and then we update the weights although we are only passing batch_size=1</p><p id="de35d79c-26df-4e8b-8bb4-95c9da742b61" class="">
+</p><p id="3ce59bf6-2834-4cf0-bfd3-070b169e0e0c" class="">-there’s a Seq2SeqTrainin⁠gArguments class specific for seq2seq models</p><p id="13316dd7-f441-4b22-bd60-1e8dc753745d" class="">
+</p><p id="37dc4c48-86aa-4e71-ac40-523f8a8ba7e1" class="">
+</p><p id="68b84a51-991b-482c-be3a-0b36c3f14b56" class="">
+</p><p id="a64a7d1b-165e-4036-a03c-a0a02d4b6416" class="">
+</p></div><h1 id="9e56ba83-58bd-4efc-9a50-2c4a58245fcd" class=""><details open=""><summary>Chapter 7: Question Answering</summary></details></h1><div class="indented"><p id="7db5eacd-2802-4797-8bf4-9823a2f9560a" class="">-extractive QA:
+involves questions whose answer can be identified as a span of text in a document</p><p id="31557263-6e94-494e-ae71-46283c14a9c3" class="">-community QA
+involves gathering question-answer pairs that are generated by users on forums like Stack Overflow, and then using semantic similarity search to find the closest matching answer to a new question.
+-long-form QA
+aims to generate complex paragraph-length answers to open-ended questions like “Why is the sky blue?”</p><p id="33d091b4-09cf-44dc-a062-acfc5dac3377" class="">
+</p><p id="463d5ea1-30cd-42e6-bc44-236cb3f0a07c" class="">-Dataset: </p><p id="2a238451-d6c2-43b6-96f5-d4d6c08ab1da" class="">SubjQA dataset, which consists of more than10,000 customer reviews in English about products and services in six domains: TripAdvisor, Restaurants, Movies, Books, Electronics, and Grocery.</p><p id="9702d373-623f-49c0-82a2-42ee6b4f2124" class="">
+</p><p id="f87d7498-b0e6-4806-8a02-27a91446bc3e" class="">-we treat the problem of extractive QA as a span classification problem where the start and end tokens of an answer span act as the labels that a model needs to predict.</p><figure id="b1146d6f-2514-485b-a38a-b19454c72f7c" class="image"><a href="Natural%20Language%20Processing%20with%20Transformers,%20Rev%2062f7d163ac2f4c02ab03da1c0dd77920/Untitled%2024.png"><img style="width:600px" src="Natural%20Language%20Processing%20with%20Transformers,%20Rev%2062f7d163ac2f4c02ab03da1c0dd77920/Untitled%2024.png"/></a></figure><p id="7390e2dd-6337-4052-a9f6-2d07d5da5b01" class="">
+</p><p id="16a9edf4-9e40-435b-a54b-1faa5f428cf0" class="">-the input is the question and context and the output is the start and end of the answer in the context</p><p id="90eb6c2a-eb23-4777-9b72-b32478fdbf69" class="">
+</p><p id="44335b8e-d839-42cd-b45c-436a96236f1f" class="">-we start with a language model that has already been fine-tuned on a large-scale QA dataset like SQuAD. In general, these models have strong reading comprehension capabilities and serve as a good baseline upon which to build a more accurate system.</p><p id="3448aa82-3f41-4a9b-a31e-02f9f2f460c2" class="">
+</p><p id="fdb53f43-094c-4dd8-bd78-e7d1238bc17e" class="">-Dealing with long passages: when the answer lies in the removed part of the text that didn’t fit in the model’s max sequence length, a sliding window is applied, we can set return_overflowing_tokens=True
+in the tokenizer to enable the sliding window</p><figure id="2da545bd-fb57-4fda-927f-6dd2ee3053b4" class="image"><a href="Natural%20Language%20Processing%20with%20Transformers,%20Rev%2062f7d163ac2f4c02ab03da1c0dd77920/Untitled%2025.png"><img style="width:600px" src="Natural%20Language%20Processing%20with%20Transformers,%20Rev%2062f7d163ac2f4c02ab03da1c0dd77920/Untitled%2025.png"/></a></figure><p id="755ed7c4-6e90-43ab-ae14-97dc205e4497" class="">
+</p><p id="555a18bd-13b9-4d54-8c8a-74e77f35c5a1" class="">-during inference we only have the question, no context, how can we construct it? <div class="indented"><p id="1ae4fc5b-b5e8-4971-a756-29d23aede65a" class="">we can take all the reviews, stack them together, but this will result in a large context and a considerable latency, that’s why we use retriever-reader systems</p></div></p><p id="9ba1b914-0739-48f2-a3e3-4594abf7ea22" class="">-modern QA systems are typically based on the
+retriever-reader architecture, which has two main components:<div class="indented"><p id="97aede00-d803-4653-ac51-58a548a082f9" class="">1- retrievers: <div class="indented"><ul id="7eb96d94-9a33-4ae3-9b60-490376b5089a" class="bulleted-list"><li style="list-style-type:disc">sparse: use word frequencies to represent each document and query as a sparse vector and then do an inner product to extract relevant documents</li></ul><ul id="aaadfd2d-9451-4beb-997a-4fafd8b4b229" class="bulleted-list"><li style="list-style-type:disc">dense: then use an encoder to represent the query and document as contextualized embeddings (which are dense vectors), these embeddings encode semantic meaning, and allow the retriever to understand the content of the query</li></ul></div></p><p id="9f3fe4f2-a3db-4c24-9436-5cfa93b094ad" class="">2- Reader:<div class="indented"><p id="e64ee3a7-ec8d-40b6-946a-094f3352ba00" class="">extract the answer from the documents</p></div></p></div></p><figure id="a86523c0-2bad-402d-94a4-700b9d09bb75" class="image"><a href="Natural%20Language%20Processing%20with%20Transformers,%20Rev%2062f7d163ac2f4c02ab03da1c0dd77920/Untitled%2026.png"><img style="width:600px" src="Natural%20Language%20Processing%20with%20Transformers,%20Rev%2062f7d163ac2f4c02ab03da1c0dd77920/Untitled%2026.png"/></a></figure><p id="e18a1ce4-a115-49c5-bb6a-646f18776194" class="">
+</p><p id="5aa22b82-aa4a-4a8e-ba09-bd566fffdad9" class="">-we build the QA system using haystack library which is based on retriever-reader architecture and integrated in 🤗 transformers</p><p id="e62b9462-7039-4ed4-b840-9d0b5c93a6ea" class="">haystack needs 2 more components, a document store and a pipeline</p><p id="fa2688fe-2484-4ab9-8474-15e5461ea888" class="">
+</p><p id="0b413238-3fa9-4afb-b8bb-e6e920b8cdc7" class="">-evaluating the retriever:<div class="indented"><p id="83ef4aec-4d1d-49bc-8bab-4d8745c56ebd" class="">1-using recall, which measures the fraction of all relevant documents that are retrieved. In this context, “relevant” simply means whether the answer is present in a passage of text or not</p><p id="0aa9eb02-fcc8-4996-8cd0-433557b3e5e2" class="">2-A complementary metric to recall is mean average precision (mAP), which rewards retrievers that can place the correct answers higher up in the document ranking.</p><p id="cfe0eb13-425e-40ee-935e-66a78dbbf04c" class="">
+</p></div></p><p id="bba0875d-59d5-4dcc-8e22-b638d7c7c2ad" class="">-evaluating the reader:<div class="indented"><p id="cac0bfe0-977a-477c-bf3f-9207d5771c2d" class="">1- Exact Match (EM):
+A binary metric that gives EM = 1 if the characters in the predicted and ground truth answers match exactly, and EM = 0 otherwise. If no answer is expected, the model gets EM = 0 if it predicts any text at all.</p><p id="867db22a-2db0-42e1-95e3-03534139dc2c" class="">2-F1-score</p><p id="3be2cff0-0563-4ccf-b0bb-e1ea6c34ed39" class="">
+</p></div></p><p id="3b362e77-9742-44d4-b463-70d92db2706b" class="">-Domain Adaptation: fine-tune on the dataset</p><p id="b70570b7-cf52-43d3-bd15-09c253ba304e" class="">
+</p><p id="f0ffed10-f866-4577-9cbe-1810ed521cf8" class="">-abstractive or generative QA: generate a coherent answer not relying on one single span, generate them with a pretrained language model.</p><p id="c87a4e80-f9bc-4f5e-b500-4cb49d491149" class="">
+</p></div><h1 id="4d9c72ed-9975-4dbc-9012-138913630687" class=""><details open=""><summary>Chapter 8: Making Transformers Efficient in Production*</summary></details></h1><div class="indented"><p id="4dd4ba11-7724-43ab-bdd5-20a25d4ed9b9" class="">-In this chapter we will explore four complementary techniques that can be used to speed up the predictions and reduce the memory footprint of your transformer models:
+<mark class="highlight-orange">knowledge distillation, quantization, pruning and graph optimization</mark>
+with the Open Neural Network Exchange (ONNX) format and ONNX Runtime (ORT).</p><p id="535b0195-8b65-4466-b97e-8b33c6b41128" class="">
+</p><p id="207bfc75-da68-41c0-8324-8f12f0821c11" class="">-our case study is intent detection</p><p id="219c2681-6192-4399-b750-643ea459b21c" class="">-CLINC150: a dataset for query classification, it has queries across 150 intents and 10 domains like banking and travel, and also includes 1,200 out-of-scope queries that belong to an oos intent class.</p><p id="2cfb1306-805c-438d-84e9-ea92f9e123cd" class="">-our performance benchmarks are model performance, latency and memory specially in production</p><p id="acf893b6-97be-458e-803f-21f7b0746999" class="">
+</p><h3 id="a6f34996-86ef-441a-9210-0e15a957f334" class=""><details open=""><summary><mark class="highlight-purple">Making Models Smaller via Knowledge Distillation: </mark></summary></details></h3><div class="indented"><p id="e727414e-e567-4be4-a67f-db764290df7e" class="">Knowledge distillation is a general-purpose method for training a smaller student model to mimic the behavior of a slower, larger, but better-performing teacher. Originally introduced in 2006 in the context of ensemble models.</p><p id="4cedee00-d3aa-4f6a-9b2c-0d2e520de073" class=""><mark class="highlight-brown">-how does it work?</mark><div class="indented"><p id="34671bdb-4629-48af-9257-9b1d636de70c" class="">knowledge is distilled or transferred from a teacher (larger) model to a student (smaller) one, the main idea is to augment the ground truth labels with a distribution of “soft probabilities” from the teacher, why? </p><p id="c2644c18-cb9c-4f78-bb5b-e622fa271944" class="">if our BERT-base classifier assigns high probabilities to multiple intents, then this could be a sign that these intents lie close to each other in the feature space. By training the student to mimic these probabilities, the goal is to distill some of this “dark knowledge”
+that the teacher has learned—that is, knowledge that is not available from the labels alone.</p><p id="d5271ab5-a17d-4bb0-9127-7c91aca68afb" class="">
+</p><p id="663131f2-ac77-4a8c-8fb6-4a661b3d71ec" class=""><mark class="highlight-orange">mathematically:</mark></p><p id="e0c898f2-0164-4c5d-9bbe-f719e9a9177a" class="">we feed an input sequence to the teacher and the teacher outputs some logits that pass through the softmax to get a distribution, we “soften” the probabilities by scaling the logits with a temperature hyperparameter</p><figure id="ed1544e7-7fad-437e-9ebd-340c1d6e605c" class="image"><a href="Natural%20Language%20Processing%20with%20Transformers,%20Rev%2062f7d163ac2f4c02ab03da1c0dd77920/Untitled%2027.png"><img style="width:293px" src="Natural%20Language%20Processing%20with%20Transformers,%20Rev%2062f7d163ac2f4c02ab03da1c0dd77920/Untitled%2027.png"/></a></figure><p id="41920892-9bdc-4fb8-979e-c3d221f53dc4" class="">the student also produces softened probabilities</p><p id="ae97d3eb-96c2-4d9a-8507-edc7e894cc14" class="">then, we use the KL divergence to measure the difference between the two probability distribution</p><figure id="d6dc8116-9d6e-49ea-a65b-cf6ade30f30a" class="image"><a href="Natural%20Language%20Processing%20with%20Transformers,%20Rev%2062f7d163ac2f4c02ab03da1c0dd77920/Untitled%2028.png"><img style="width:346px" src="Natural%20Language%20Processing%20with%20Transformers,%20Rev%2062f7d163ac2f4c02ab03da1c0dd77920/Untitled%2028.png"/></a></figure><p id="2faa5e06-12e6-4c73-937e-21498c81c652" class="">then the loss is the KL divergence multiplied by a normalization factor to account for the temperature parameter</p><figure id="097eebfc-8da2-4c46-9c5b-96578d24cf0a" class="image"><a href="Natural%20Language%20Processing%20with%20Transformers,%20Rev%2062f7d163ac2f4c02ab03da1c0dd77920/Untitled%2029.png"><img style="width:200px" src="Natural%20Language%20Processing%20with%20Transformers,%20Rev%2062f7d163ac2f4c02ab03da1c0dd77920/Untitled%2029.png"/></a></figure><p id="cac544e6-d16c-4b2e-8e4f-3d46bd5c67af" class="">For classification tasks, the student loss is then a weighted average of the distillation loss with the usual cross-entropy loss</p><figure id="af993fc5-8424-41ef-a772-fb62c4ebf7d4" class="image"><a href="Natural%20Language%20Processing%20with%20Transformers,%20Rev%2062f7d163ac2f4c02ab03da1c0dd77920/Untitled%2030.png"><img style="width:307px" src="Natural%20Language%20Processing%20with%20Transformers,%20Rev%2062f7d163ac2f4c02ab03da1c0dd77920/Untitled%2030.png"/></a></figure><p id="1172bc89-c94e-460a-bf67-8a4983906de9" class="">where <strong>α </strong>is a hyperparameter that controls the relative strength of each loss</p><p id="69f9c831-1e71-4df1-a442-9d43048c27f6" class="">-the temperature is set to 1 at inference time to recover the standard softmax probabilities.</p><p id="e9f4c9c5-f5e4-492b-80dd-0c76f4871bb1" class="">
+</p><figure id="0f0e29c5-9eb8-4cbe-84f6-41f3f6fffdd1" class="image"><a href="Natural%20Language%20Processing%20with%20Transformers,%20Rev%2062f7d163ac2f4c02ab03da1c0dd77920/Untitled%2031.png"><img style="width:600px" src="Natural%20Language%20Processing%20with%20Transformers,%20Rev%2062f7d163ac2f4c02ab03da1c0dd77920/Untitled%2031.png"/></a></figure><p id="0f3559d4-e966-47e2-917c-1fdaa68eb631" class="">the knowledge distillation process</p><p id="9d16f86e-e9f1-4705-903a-c17939e95679" class="">
+</p><ul id="842cbf05-65fc-4909-a3f7-bfb54eb3278f" class="bulleted-list"><li style="list-style-type:disc"><strong>α and T can be found using an optimization framework called Optuna, integrated in </strong>🤗 transformers</li></ul></div></p><p id="d29cf0d3-d618-4989-ad40-a49f9066ba21" class="">
+</p></div><h3 id="460cd133-979f-480b-94b9-712075c9d39c" class=""><details open=""><summary><mark class="highlight-purple">Making Models Faster with Quantization</mark></summary></details></h3><div class="indented"><p id="0f3ef827-cd6e-44a9-a191-883a320efcd7" class="">representing the weights and activations with low-precision data types like 8-bit integer (INT8) instead of the usual 32-bit floating point (FP32). Reducing the number of bits means the resulting model requires less memory storage, and operations like matrix multiplication can be performed much faster with integer arithmetic.</p><p id="8709408b-b57d-4f9d-8ac0-692785625cf5" class="">
+</p></div></div><p id="c5e285f1-5145-4a4f-8764-f03cc99b911b" class="">
+</p><p id="4317685e-60aa-4dd5-ada8-cf796c9737a5" class=""><mark class="highlight-teal">not started yet</mark></p><h1 id="d28cbf3a-f445-4b46-951a-b8f9dda6fc4a" class=""><details open=""><summary>Chapter 9: Dealing with Few to No Labels</summary></details></h1><h1 id="396c3e98-21de-498a-9c17-e01b5b1a6f47" class=""><details open=""><summary>Chapter 10: Training Transformers from Scratch</summary></details></h1><div class="indented"><p id="1ea0a8c3-f924-4875-b735-edb39e1264b2" class="">-we will build a GPT like model for generating python code → CodeParrot, training a transformer from scratch</p><p id="8327fdb3-4ec4-44d9-814a-99a3fb8c0f2d" class="">-steps are:</p><ul id="4ed865b9-cb47-4759-8309-90251364aa7f" class="bulleted-list"><li style="list-style-type:disc">Gathering and processing a very large dataset</li></ul><ul id="c8cb947d-f8fd-4feb-a7aa-d658ffc1b8fd" class="bulleted-list"><li style="list-style-type:disc">Creating a custom tokenizer for our dataset</li></ul><ul id="95d8d41e-68e1-4b44-bc1a-0f14008ac0d5" class="bulleted-list"><li style="list-style-type:disc">Training a model on multiple GPUs at scale</li></ul><p id="c9faa836-4710-4285-bd6b-c13da54308f2" class="">
+</p><p id="d9d25993-5e2c-4f11-a70e-8e8a1c03a6f5" class="">
+</p></div><h1 id="f4080b99-5854-4cf5-8d6b-fea75ac6bc31" class=""><details open=""><summary>Chapter 11: Future Directions</summary></details></h1></div></article></body></html>
